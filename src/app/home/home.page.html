@@ -5,7 +5,6 @@
     </ion-toolbar>
   </ion-header>
 
-  <!-- Nuevo contenedor para centrar el contenido -->
   <div id="content-container">
     <div id="image-container">
       <img src="assets/img/icon_home.png" alt="Car Image" id="car-image">
@@ -18,12 +17,12 @@
 
       <ion-card-content>
         <form (submit)="loginUsuario($event)">
-          <ion-item>
+          <ion-item class="custom-input-item">
             <ion-label position="floating">Usuario</ion-label>
             <ion-input type="text" [(ngModel)]="username" name="username" required></ion-input>
           </ion-item>
 
-          <ion-item>
+          <ion-item class="custom-input-item">
             <ion-label position="floating">Contraseña</ion-label>
             <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
           </ion-item>
@@ -31,9 +30,9 @@
           <ion-button expand="block" type="submit">Iniciar Sesión</ion-button>
         </form>
 
-        <ion-button fill="clear" expand="block" (click)="resetPassword()">
-          ¿Olvidaste tu contraseña?
-        </ion-button>
+        <div class="forgot-password">
+          <a href="#" (click)="resetPassword()">¿Olvidaste tu contraseña?</a>
+        </div>
       </ion-card-content>
     </ion-card>
   </div>
