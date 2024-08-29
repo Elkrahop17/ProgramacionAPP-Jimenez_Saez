@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
@@ -8,10 +9,12 @@ import { Component } from '@angular/core';
 export class InicioPage {
 
   nombre_usuario: string;
-  constructor() { 
+  constructor(private router: Router) { 
 
     this.nombre_usuario = 'Miguel';
   }
 
-
+  goToProfile() {
+    this.router.navigate(['/profile']);
+  }
 }
