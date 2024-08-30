@@ -1,0 +1,28 @@
+<header>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</header>
+
+
+<ion-content [fullscreen]="true">
+  <div class="header">
+    <ion-button class="back-button" (click)="goToProfile()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <h1 class="page-title">Configuración</h1>
+  </div>
+
+
+  <div class="user-info">
+    <img class="user-image" src="assets/user-placeholder.png" alt="User Image">
+    <div class="user-details">
+      <p class="user-email">usuario@correo.com</p>
+      <ion-button class="go-to-details" (click)="goToUserDetails()">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+</ion-content>
+

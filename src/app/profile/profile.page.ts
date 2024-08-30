@@ -28,4 +28,8 @@ export class ProfilePage {
   goToLogin() {
     this.router.navigate(['/home']);
   }
+
+  goToConfiguracion(){
+    this.router.navigate(['/configuracion'])
+  }
 }
