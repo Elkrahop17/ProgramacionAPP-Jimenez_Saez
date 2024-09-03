@@ -19,13 +19,13 @@ export class HomePage {
 
     // logica para verificar si las credenciales son correctas
     if (this.username === 'usuario' && this.password === 'contraseña') {
-      await this.showAlert('Éxito', 'Inicio de sesión exitoso.');
+      await this.showAlert('Éxito', 'Inicio de sesión exitoso.', 1500);
       console.log("Inicio de sesión exitoso.");
 
       this.navCtrl.navigateForward('/inicio');
       
     } else {
-      await this.showAlert('Error', 'Credenciales incorrectas. Por favor, inténtalo de nuevo.');
+      await this.showAlert('Error', 'Credenciales incorrectas. Por favor, inténtalo de nuevo.', 1500);
       console.log("Credenciales incorrectas.");
     }
 
@@ -34,12 +34,12 @@ export class HomePage {
 
   // Método para manejar el restablecimiento de contraseña
   async resetPassword() {
-    await this.showAlert('Restablecer Contraseña', 'Se ha enviado un enlace para restablecer la contraseña a tu correo.');
+    await this.showAlert('Restablecer Contraseña', 'Se ha enviado un enlace para restablecer la contraseña a tu correo.', 1500);
     console.log("Enlace de restablecimiento de contraseña enviado.");
   }
 
   //Metodo para mostrar una alerta
-  async showAlert(header: string, message: string) {
+  async showAlert(header: string, message: string,  duration: number) {
     const alert = await this.alertController.create({
       header: header,
       message: message,
@@ -48,6 +48,12 @@ export class HomePage {
 
     // Muestra la alerta en pantalla
     await alert.present();
+
+    // Cierra la alerta automáticamente después del tiempo especificado
+    setTimeout(() => {
+      alert.dismiss();
+    }, duration);
+
   }
 
 }
