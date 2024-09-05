@@ -22,14 +22,10 @@ export class ProfilePage {
   }
 
   goToInicio() {
-    this.router.navigate(['/inicio']); 
-  }
-
-  goToLogin() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['tabs/inicio']); 
   }
 
   goToConfiguracion(){
-    this.router.navigate(['/configuracion'])
+    this.router.navigate(['configuracion'])
   }
 }

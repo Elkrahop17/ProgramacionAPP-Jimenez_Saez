@@ -22,7 +22,7 @@ export class HomePage {
       await this.showAlert('Éxito', 'Inicio de sesión exitoso.', 1500);
       console.log("Inicio de sesión exitoso.");
 
-      this.navCtrl.navigateForward('/inicio');
+      this.navCtrl.navigateForward('/tabs/inicio');
       
     } else {
       await this.showAlert('Error', 'Credenciales incorrectas. Por favor, inténtalo de nuevo.', 1500);
