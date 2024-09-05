@@ -15,6 +15,6 @@ export class InicioPage {
   }
 
   goToProfile() {
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/tabs/perfil']);
   }
 }
