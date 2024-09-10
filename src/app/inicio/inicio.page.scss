@@ -28,15 +28,25 @@
 }
 
 
-.searchbar-redondeada {
-    --border-radius: 50px; 
-    --background: #ffffff; 
-    --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
-    --padding-start: 16px; /* Relleno interno a la izquierda */
-    --padding-end: 16px; /* Relleno interno a la derecha */
-    font-family: 'Urbanist', sans-serif;
-
+.address-container {
+    margin-top: 25px; 
 }
+
+.address-container ion-label {
+    margin-bottom: 10px;
+}
+
+ion-item {
+    --background: #ffffff; 
+    --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+ion-input {
+    --padding-start: 16px; 
+    --padding-end: 16px; 
+    font-family: 'Urbanist', sans-serif;
+}
+
 
 .cards-container {
     margin-top: 20px;
@@ -50,11 +60,25 @@
     border-radius: 8px;
     padding: 8px;
     background-color: #fff;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.card-item.selected {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: #4CAF50;
+}
+
+.card-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .card-image-container {
-    width: 80px; /* Tamaño reducido para la imagen */
-    height: 80px; /* Tamaño reducido para la imagen */
+    width: 80px; 
+    height: 80px; 
     overflow: hidden;
     border-radius: 8px;
 }
@@ -75,13 +99,81 @@
 }
 
 .card-description {
-    font-size: 0.9rem; /* Tamaño de fuente reducido */
+    font-size: 0.9rem; 
     color: #333;
     font-family: 'Urbanist', sans-serif;
 }
 
 .card-price {
-    font-size: 1rem; /* Tamaño de fuente reducido */
+    font-size: 1rem; 
+    font-weight: bold;
+    color: #000;
+    text-align: right;
+    font-family: 'Urbanist', sans-serif;
+}
+
+.input-address {
+    --background: #ffffff;
+    --box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    --padding-start: 16px;
+    --padding-end: 16px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    font-family: 'Urbanist', sans-serif;
+}
+
+
+.rating-stars {
+    display: flex;
+    margin-top: 5px;
+    justify-content: flex-end;
+}
+
+.star {
+    font-size: 14px; 
+    color: #f5c518; 
+    margin-left: 4px;
+    
+}
+
+.card-image-container {
+    width: 80px; 
+    height: 80px; 
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.card-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-top: 10px;
+}
+
+#car1{
+    margin-top: 2px;
+}
+
+#car2{
+    margin-top: 25px;
+}
+
+.card-info {
+    flex: 1;
+    margin-left: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-description {
+    font-size: 0.9rem; 
+    color: #333;
+    font-family: 'Urbanist', sans-serif;
+}
+
+.card-price {
+    font-size: 1rem; 
     font-weight: bold;
     color: #000;
     text-align: right;

@@ -1,13 +1,53 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>servicios</ion-title>
-  </ion-toolbar>
-</ion-header>
+<header>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">servicios</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="header">
+    <ion-button class="back-button" (click)="goToInicio()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <h1 class="page-title">Servicios</h1>
+  </div>
+
+  <!-- Barra de búsqueda -->
+  <ion-item class="search-item">
+    <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterServices()" placeholder="Buscar servicios"></ion-searchbar>
+  </ion-item>
+
+  <!-- Filtros y contenido de servicios -->
+  <div class="filter-container">
+    <ion-segment [(ngModel)]="selectedCategory" (ionChange)="filterServices()">
+      <ion-segment-button value="all">
+        Todos
+      </ion-segment-button>
+      <ion-segment-button value="transport">
+        Transporte
+      </ion-segment-button>
+      <ion-segment-button value="premium">
+        Premium
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+
+  <div class="service-container">
+    <ion-card *ngFor="let service of filteredServices" class="service-card" (click)="viewDetails(service)">
+      <ion-card-header>
+        <ion-card-title>{{ service.title }}</ion-card-title>
+        <div class="rating-stars">
+          <ion-icon *ngFor="let star of service.rating" name="star" class="star"></ion-icon>
+        </div>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ service.description }}</p>
+        <ion-item lines="none" class="price-item">
+          <ion-label>{{ service.price }}</ion-label>
+          <ion-button fill="outline" (click)="selectService(service)">Seleccionar</ion-button>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
