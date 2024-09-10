@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-actividad',
   templateUrl: './actividad.page.html',
   styleUrls: ['./actividad.page.scss'],
 })
-export class ActividadPage implements OnInit {
+export class ActividadPage{
 
-  constructor() { }
-
-  ngOnInit() {
+  goToInicio() {
+    this.router.navigate(['tabs/inicio']); 
   }
+
+  constructor(private router: Router) { }
 
 }
