@@ -78,6 +78,7 @@ export class ConfiguracionPage{
   }
 
   logout() {
+    
     this.router.navigate(['/home']);
   }
 
