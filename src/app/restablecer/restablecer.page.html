@@ -1,0 +1,41 @@
+<header>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</header>
+
+<ion-content [fullscreen]="true">
+  <div class="header">
+    <ion-button class="back-button" (click)="GoToBack()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <h1 class="page-title">Restablecer contraseña</h1>
+  </div>
+
+  <div class="restablecer-container">
+    <div class="header-container">
+      <h1>Restablece tu Contraseña</h1>
+      <p>Introduce y confirma tu nueva contraseña</p>
+    </div>
+
+    <ion-card class="custom-card">
+      <ion-card-content>
+        <form (submit)="cambiarContrasena($event)">
+          <ion-item class="custom-input-item">
+            <ion-label position="floating">Nueva Contraseña</ion-label>
+            <ion-input type="password" [(ngModel)]="nuevaContrasena" name="nuevaContrasena" required></ion-input>
+          </ion-item>
+
+          <ion-item class="custom-input-item">
+            <ion-label position="floating">Confirmar Contraseña</ion-label>
+            <ion-input type="password" [(ngModel)]="confirmarContrasena" name="confirmarContrasena" required></ion-input>
+          </ion-item>
+
+          <ion-button expand="block" type="submit" class="custom-button">Cambiar Contraseña</ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
+

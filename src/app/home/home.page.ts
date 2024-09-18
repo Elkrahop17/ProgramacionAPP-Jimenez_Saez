@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,45 +10,46 @@ import { AlertController, NavController } from '@ionic/angular';
 export class HomePage {
   username: string;
   password: string;
-  constructor(private alertController: AlertController, private navCtrl: NavController) {
+
+  constructor(private alertController: AlertController, private navCtrl: NavController, private router: Router) {
     this.username = "";
     this.password = "";
   }
-  
-  async loginUsuario(event:Event){
+
+  async loginUsuario(event: Event) {
     event.preventDefault();
 
-    // logica para verificar si las credenciales son correctas
-    if (this.username === 'usuario' && this.password === 'contraseña') {
-      await this.showAlert('Éxito', 'Inicio de sesión exitoso.');
+    // Obtén la contraseña almacenada en localStorage
+    const storedPassword = localStorage.getItem('password');
+    
+    // Verifica si las credenciales son correctas
+    if (this.username === 'usuario' && this.password === storedPassword) {
+      await this.showAlert('Éxito', 'Inicio de sesión exitoso.', 1500);
       console.log("Inicio de sesión exitoso.");
 
-      this.navCtrl.navigateForward('/inicio');
+      this.navCtrl.navigateForward('/tabs/inicio');
       
     } else {
-      await this.showAlert('Error', 'Credenciales incorrectas. Por favor, inténtalo de nuevo.');
+      await this.showAlert('Error', 'Credenciales incorrectas. Por favor, inténtalo de nuevo.', 1500);
       console.log("Credenciales incorrectas.");
     }
-
   }
 
-
-  // Método para manejar el restablecimiento de contraseña
   async resetPassword() {
-    await this.showAlert('Restablecer Contraseña', 'Se ha enviado un enlace para restablecer la contraseña a tu correo.');
-    console.log("Enlace de restablecimiento de contraseña enviado.");
+    this.router.navigate(['/restablecer']);
   }
 
-  //Metodo para mostrar una alerta
-  async showAlert(header: string, message: string) {
+  async showAlert(header: string, message: string, duration: number) {
     const alert = await this.alertController.create({
       header: header,
       message: message,
       buttons: ['OK']
     });
 
-    // Muestra la alerta en pantalla
     await alert.present();
-  }
 
+    setTimeout(() => {
+      alert.dismiss();
+    }, duration);
+  }
 }

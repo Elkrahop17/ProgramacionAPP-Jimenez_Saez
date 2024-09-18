@@ -1,0 +1,159 @@
+  <header>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  </header>
+
+  <ion-content [fullscreen]="true">
+    <div class="header">
+      <ion-button class="back-button" (click)="goToProfile()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <h1 class="page-title">Configuración</h1>
+    </div>
+
+    <div class="user-info">
+      <ion-avatar class="user-avatar">
+        <img src="assets/img/Leyton.png" alt="Imagen de Usuario">
+      </ion-avatar>
+      <div class="user-details">
+        <p class="user-email">Miguel.L&#64;cochino.com</p>
+        <ion-icon name="chevron-forward-outline" class="redirect-icon"></ion-icon>
+      </div>
+    </div>
+
+    <!-- Sección para Cambiar Datos Personales -->
+
+    <div class="settings-section">
+      <div class="section-header">
+        <h2 class="section-title">Cambiar Datos Personales</h2>
+        <ion-icon name="create-outline" class="edit-icon" (click)="openModal()"></ion-icon>
+      </div>
+    </div>
+  
+    <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
+      <ng-template>
+        <div class="modal-content">
+          <h3 class="modal-title">Editar Información Personal</h3>
+          <ion-item>
+            <ion-label position="stacked">Nombre de Usuario</ion-label>
+            <ion-input type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Email</ion-label>
+            <ion-input type="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Contraseña</ion-label>
+            <ion-input type="password"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Fecha de Nacimiento</ion-label>
+            <ion-datetime display-format="DD/MM/YYYY"></ion-datetime>
+          </ion-item>
+          <ion-button expand="block" (click)="saveChanges()">Guardar Cambios</ion-button>
+        </div>
+      </ng-template>
+    </ion-modal>
+
+
+    <!-- Sección para Configuración de Apariencia -->
+    <div class="settings-section">
+      <div class="section-header">
+        <h2 class="section-title">Apariencia</h2>
+        <ion-icon name="create-outline" class="edit-icon" (click)="openAppearanceModal()"></ion-icon>
+      </div>
+    </div>
+
+
+    <ion-modal [isOpen]="isAppearanceModalOpen" (didDismiss)="closeAppearanceModal()">
+      <ng-template>
+        <div class="modal-content">
+          <h3 class="modal-title">Configurar Apariencia</h3>
+          <ion-item>
+            <ion-label position="stacked">Tema</ion-label>
+            <ion-select>
+              <ion-select-option value="light">Claro</ion-select-option>
+              <ion-select-option value="dark">Oscuro</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Tamaño de Fuente</ion-label>
+            <ion-select>
+              <ion-select-option value="small">Pequeña</ion-select-option>
+              <ion-select-option value="medium">Mediana</ion-select-option>
+              <ion-select-option value="large">Grande</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-button expand="block" (click)="saveAppearanceChanges()">Guardar Cambios</ion-button>
+        </div>
+      </ng-template>
+    </ion-modal>
+
+    <!-- Título para Seguridad -->
+    <div class="settings-section">
+      <h1 class="section-title1">Seguridad</h1>
+    </div>
+
+    <!-- Sección para Preferencias de Seguridad -->
+    <div class="settings-section">
+      <div class="section-header">
+        <h2 class="section-title">Preferencias de Seguridad</h2>
+        <ion-icon name="create-outline" class="edit-icon" (click)="openSecurityModal()"></ion-icon>
+      </div>
+    </div>
+
+    <ion-modal [isOpen]="isSecurityModalOpen" (didDismiss)="closeSecurityModal()">
+      <ng-template>
+        <div class="modal-content">
+          <h3 class="modal-title">Configurar Preferencias de Seguridad</h3>
+          <ion-item>
+            <ion-label position="stacked">Autenticación en Dos Pasos</ion-label>
+            <ion-toggle slot="end"></ion-toggle>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Notificaciones de Inicio de Sesión</ion-label>
+            <ion-toggle slot="end"></ion-toggle>
+          </ion-item>
+          <ion-button expand="block" (click)="saveSecurityChanges()">Guardar Cambios</ion-button>
+        </div>
+      </ng-template>
+    </ion-modal>
+
+    <!-- Sección para Administrar Contactos de Confianza -->
+    <div class="settings-section">
+      <div class="section-header">
+        <h2 class="section-title">Administra tus Contactos de Confianza</h2>
+        <ion-icon name="create-outline" class="edit-icon" (click)="openContactsModal()"></ion-icon>
+      </div>
+    </div>
+
+    <!-- Modal para Administrar Contactos de Confianza -->
+  <ion-modal [isOpen]="isContactsModalOpen" (didDismiss)="closeContactsModal()">
+    <ng-template>
+      <div class="modal-content">
+        <h3 class="modal-title">Gestionar Contactos de Confianza</h3>
+        <ion-item>
+          <ion-label position="stacked">Nombre</ion-label>
+          <ion-input type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Teléfono</ion-label>
+          <ion-input type="tel"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input type="email"></ion-input>
+        </ion-item>
+        <ion-button expand="block" (click)="addContact()">Añadir Contacto</ion-button>
+        <ion-list>
+          <ion-item *ngFor="let contact of contacts">
+            <ion-label>{{ contact.name }} - {{ contact.phone }} - {{ contact.email }}</ion-label>      
+          </ion-item>
+        </ion-list>
+      </div>
+    </ng-template>
+  </ion-modal>
+
+  <ion-button class="logout-button" color="danger" (click)="logout()">Cerrar Sesión</ion-button>
+  </ion-content>
