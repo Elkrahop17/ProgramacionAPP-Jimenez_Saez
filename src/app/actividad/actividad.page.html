@@ -5,11 +5,24 @@
 </header>
 
 <ion-content>
+  <!-- Botón de retroceso y título -->
   <div class="header">
     <ion-button class="back-button" (click)="goToInicio()">
       <ion-icon name="arrow-back-outline"></ion-icon>
     </ion-button>
-    <h1 class="page-title">Servicios</h1>
+    <h1 class="page-title">Historial de Pedidos</h1>
   </div>
 
+  <!-- Lista de pedidos -->
+  <div class="order-container">
+    <ion-card *ngFor="let pedido of pedidos" class="order-card">
+      <ion-card-header>
+        <ion-card-title>{{ pedido.modeloAuto }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Fecha: {{ pedido.fechaPedido }}</p>
+        <p>Estado: <strong>{{ pedido.estado }}</strong></p>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
