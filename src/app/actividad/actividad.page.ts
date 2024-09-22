@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
-
-interface Pedido {
-  id: number;
-  modeloAuto: string;
-  fechaPedido: string;
-  estado: string;
-}
+import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-actividad',
@@ -14,14 +9,34 @@ interface Pedido {
 })
 export class ActividadPage {
 
-  pedidos: Pedido[] = [
-    { id: 1, modeloAuto: 'Toyota Corolla', fechaPedido: '2024-09-01', estado: 'Entregado' },
-    { id: 2, modeloAuto: 'Honda Civic', fechaPedido: '2024-08-25', estado: 'En proceso' },
-    { id: 3, modeloAuto: 'Ford Mustang', fechaPedido: '2024-08-15', estado: 'Cancelado' },
+  // Datos de ejemplo para los pedidos
+  pedidos = [
+    { 
+      title: 'Transporte Compartido', 
+      nombreUsuario: 'Juan Pérez',  
+      modeloAuto: 'Toyota Corolla', 
+      fechaPedido: formatDate(new Date(), 'dd/MM/yyyy', 'en'), 
+      estado: 'Completado', 
+      price: '$10.000', 
+      rating: [1, 1, 1, 1, 0] 
+    },
+    { 
+      title: 'Servicio Premium', 
+      nombreUsuario: 'Sofía González', 
+      modeloAuto: 'Mercedes-Benz Clase C', 
+      fechaPedido: formatDate(new Date(), 'dd/MM/yyyy', 'en'), 
+      estado: 'Pendiente', 
+      price: '$15.000', 
+      rating: [1, 1, 1, 1, 1] 
+    }
   ];
 
+  // Navegar de vuelta a la página de inicio
   goToInicio() {
-    // Lógica para volver a la página de inicio
+    this.router.navigate(['tabs/inicio']); 
   }
 
+  constructor(private router: Router) { }
+
 }
+

@@ -17,12 +17,21 @@
   <div class="order-container">
     <ion-card *ngFor="let pedido of pedidos" class="order-card">
       <ion-card-header>
-        <ion-card-title>{{ pedido.modeloAuto }}</ion-card-title>
+        <ion-card-title>{{ pedido.title }}</ion-card-title>
+        <div class="rating-stars">
+          <ion-icon *ngFor="let star of pedido.rating" name="star" class="star"></ion-icon>
+        </div>
       </ion-card-header>
       <ion-card-content>
-        <p>Fecha: {{ pedido.fechaPedido }}</p>
-        <p>Estado: <strong>{{ pedido.estado }}</strong></p>
+        <p><strong>Pedido por:</strong> {{ pedido.nombreUsuario }}</p>
+        <p><strong>Modelo de Auto:</strong> {{ pedido.modeloAuto }}</p>
+        <p><strong>Fecha:</strong> {{ pedido.fechaPedido }}</p>
+        <p><strong>Estado:</strong> <strong>{{ pedido.estado }}</strong></p>
+        <ion-item lines="none" class="price-item">
+          <ion-label><strong>Precio:</strong> {{ pedido.price }}</ion-label>
+        </ion-item>
       </ion-card-content>
     </ion-card>
   </div>
 </ion-content>
+
