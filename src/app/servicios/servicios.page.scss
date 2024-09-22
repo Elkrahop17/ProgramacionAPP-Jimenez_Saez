@@ -1,3 +1,7 @@
+*{
+    font-family: "Urbanist", sans-serif;
+}
+
 .header {
     display: flex;
     align-items: center; 
@@ -38,30 +42,34 @@ ion-searchbar {
     --input-color: #333333;
     --border-radius: 20px;
     --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    
 }
 
 .filter-container {
     padding: 16px;
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
 }
 
 .service-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 16px;
-    font-family: "Urbanist", sans-serif;
+    flex-wrap: wrap; // Permite que las tarjetas se ajusten en varias filas
+    justify-content: center; 
+    align-items: flex-start; // Alinea las tarjetas en la parte superior
+    margin: 16px; 
+    
 }
 
 .service-card {
-    width: 90%;
-    max-width: 500px;
-    margin: 10px 0;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 90%; 
+    max-width: 400px;
+    margin: 16px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease;
 }
+
 
 .service-card:hover {
     transform: translateY(-5px);
@@ -85,4 +93,51 @@ ion-searchbar {
     --padding-start: 16px;
     --padding-end: 16px;
     --border-radius: 20px;
+}
+.star {
+    color: #ffd001; 
+    margin-right: 5px;
+}
+
+.rating-stars {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+// Estilos del modal
+ion-modal {
+    --background: #ffffff; 
+    --border-radius: 16px;
+    --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+ion-header {
+    background: #6a5acd;
+    color: #ffffff; 
+}
+
+ion-toolbar {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+ion-title {
+    font-family: 'Urbanist', sans-serif; 
+    font-weight: 700; 
+}
+
+form {
+    padding: 20px; 
+}
+
+ion-item {
+    --border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+ion-button {
+    --background: #6a5acd;
+    --color: #ffffff;
+    border-radius: 8px;
+    margin-top: 10px; 
 }

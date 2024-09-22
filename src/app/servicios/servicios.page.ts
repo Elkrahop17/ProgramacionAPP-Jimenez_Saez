@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,31 +7,54 @@ import { Router } from '@angular/router';
   styleUrls: ['./servicios.page.scss'],
 })
 export class ServiciosPage {
+  selectedService: any = null;
+  requester: string = '';
+  date: string = '';
+  
+  carModel: string = '';
+  pricePerPerson: number = 0;
+  isModalOpen: boolean = false;
 
   services = [
-    { 
-      id: '1', 
-      title: 'Transporte Compartido', 
-      description: 'Viaja con otros estudiantes', 
-      price: '$10.000', 
-      rating: [1, 1, 1, 1, 0] 
-    },
-    { 
-      id: '2', 
-      title: 'Servicio Premium', 
-      description: 'Transporte directo a tu casa.', 
-      price: '$15.000', 
-      rating: [1, 1, 1, 1, 1] 
-    },
-    
+    { id: '1', title: 'Transporte Compartido', description: 'Viaja con otros estudiantes', price: '$10.000', rating: [1, 1, 1, 1, 0] },
+    { id: '2', title: 'Servicio Premium', description: 'Transporte directo a tu casa.', price: '$15.000', rating: [1, 1, 1, 1, 1] },
   ];
 
   selectService(service: any) {
-    console.log('Servicio seleccionado:', service);
+    this.selectedService = service;
+    this.openModal(); 
+
+  }
+
+  openModal() {
+    this.isModalOpen = true;
+    this.resetForm(); 
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+  }
+
+  resetForm() {
+    this.requester = '';
+    this.date = '';
+    this.carModel = '';
+    this.pricePerPerson = 0;
+  }
+
+  submitService() {
+    const data = {
+      requester: this.requester,
+      date: this.date,
+      carModel: this.carModel,
+      pricePerPerson: this.pricePerPerson,
+    };
+    console.log('Datos del servicio:', data);
+    this.closeModal(); 
   }
 
   goToInicio() {
-    this.router.navigate(['tabs/inicio']); 
+    this.router.navigate(['tabs/inicio']);
   }
 
   filteredServices = [...this.services];
@@ -46,15 +69,14 @@ export class ServiciosPage {
     });
   }
 
-  viewDetails(service: any) {
-    console.log('Viewing details for:', service);
-    
-  }
+  constructor(private router: Router) {}
 
-  constructor(private router: Router) { 
-    
-  }
+}
+
+
 
   
 
-}
+  
+
+
