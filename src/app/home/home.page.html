@@ -1,40 +1,51 @@
+<header>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</header>
+
 <ion-content [fullscreen]="true" scrollEvents="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Inicio de Sesión</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="content-container">
-    <div id="image-container">
-      <img src="assets/img/icon_home.png" alt="Car Image" id="car-image">
+  <!-- Contenedor general con la imagen de fondo de San Joaquín -->
+  <div id="background-container">
+    <img src="assets/img/san-joaquin.jpg" alt="Fondo edificio DuocUC" id="background-image">
+    
+    <!-- Logo que siempre aparece en el fondo, encima del fondo -->
+    <div id="logo-container">
+      <img src="assets/img/duoc.png" alt="Logo DuocUC" id="duoc-logo">
     </div>
+    
+    <!-- Formulario de login, que aparece después de 5 segundos -->
+    <div id="content-container" *ngIf="showLogin" class="slide-up">
+      <div class="login-card">
+        <ion-card-header>
+          <ion-card-title class="ion-text-center">Bienvenido Usuario</ion-card-title>
+          <p class="ion-text-center">Logeate para ingresar</p>
+        </ion-card-header>
 
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title class="ion-text-center">Iniciar Sesión</ion-card-title>
-      </ion-card-header>
+        <ion-card-content>
+          <form (submit)="loginUsuario($event)">
+            <div class="input-container">
+              <ion-item class="custom-input-item">
+                <ion-icon name="mail-outline" slot="start"></ion-icon>
+                <ion-input type="email" placeholder="Email" [(ngModel)]="username" name="username" required></ion-input>
+              </ion-item>
 
-      <ion-card-content>
-        <form (submit)="loginUsuario($event)">
-          <ion-item class="custom-input-item">
-            <ion-label position="floating">Usuario</ion-label>
-            <ion-input type="text" [(ngModel)]="username" name="username" required></ion-input>
-          </ion-item>
+              <ion-item class="custom-input-item">
+                <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+                <ion-input type="password" placeholder="Password" [(ngModel)]="password" name="password" required></ion-input>
+              </ion-item>
+            </div>
 
-          <ion-item class="custom-input-item">
-            <ion-label position="floating">Contraseña</ion-label>
-            <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
-          </ion-item>
+            <ion-button expand="block" type="submit" class="login-button">Ingresar</ion-button>
+          </form>
 
-          <ion-button expand="block" type="submit">Iniciar Sesión</ion-button>
-        </form>
+          <div class="forgot-password">
+            <a (click)="resetPassword()">Olvidaste tu contraseña?</a>
+          </div>
 
-        <div class="forgot-password">
-          <a (click)="resetPassword()">¿Olvidaste tu contraseña?</a>
-        </div>
-      </ion-card-content>
-    </ion-card>
+          <ion-button expand="block" fill="outline" class="signup-button">Registrarse</ion-button>
+        </ion-card-content>
+      </div>
+    </div>
   </div>
-  
 </ion-content>
