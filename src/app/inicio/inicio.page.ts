@@ -8,20 +8,21 @@ import { Router } from '@angular/router';
 })
 export class InicioPage {
   address: string = '';
-  nombre_usuario: string;
-  selectedCar: string | null = null
-  constructor(private router: Router) { 
-    
-    this.nombre_usuario = 'Miguel';
-  }
+  nombre_usuario: string = 'Miguel';
 
-
-  // Método para seleccionar un coche
-  selectCar(carId: string) {
-    this.selectedCar = carId;
-  }
+  constructor(private router: Router) {}
 
   goToProfile() {
     this.router.navigate(['/tabs/perfil']);
+  }
+
+   // Método para redirigir a la página de "Ofrecer Vehículo"
+  ofrecerViaje() {
+    this.router.navigate(['/ofrecer-vehiculo']);
+  }
+
+  // Método para redirigir a la página de "Buscar Transporte"
+  buscarTransporte() {
+    this.router.navigate(['/tabs/servicio']);
   }
 }

@@ -1,43 +1,124 @@
+*{
+  font-family: 'Urbanist', sans-serif;
+}
+
+
+/* Fondo de la aplicación con la imagen de San Joaquín */
+#background-container {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+#background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Contenedor del logo, centrado horizontalmente y arriba del fondo */
+#logo-container {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+#logo-container img {
+  max-width: 200px;
+  height: auto;
+}
+
+/* El contenedor del formulario ocupará todo el ancho inferior y la transición desde abajo */
 #content-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70%;
+  padding: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+
+/* Login Card ocupará todo el ancho y parte del largo inferior */
+.login-card {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.2);
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #ffffff, #26014e); 
-  min-height: 100vh;
-  padding: 20px;
+  justify-content: space-between;
 }
 
-#image-container img {
-  max-width: 250px;
-  margin-bottom: 20px; 
-  filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1));
-}
-
-/* Estilo de la Card */
-ion-card {
-  width: 100%;
-  background-color: #F5F5F5; 
-  border-radius: 15px; 
-  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1); 
-  margin: 20px auto;
-  margin-top: -40px;
+ion-card-header {
+  padding-bottom: 0;
 }
 
 ion-card-title {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
-  color: #0d1436; 
-  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Estilo de los inputs para que se vean como en la imagen */
+.input-container {
+  margin-top: 10px;
 }
 
 .custom-input-item {
-  background: transparent;
-  border-radius: 15px;
-  border: 1px solid #020354;
-  margin-bottom: 15px;
-  border-radius: 12px;
-  padding: 0;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+  --highlight-color-focused: transparent;
+}
+
+ion-input {
+  padding-left: 10px;
+  font-size: 1rem;
+}
+
+/* Botón de login en amarillo */
+.login-button {
+  --background: #ffcc00;
+  color: white;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Botón de signup en outline */
+.signup-button {
+  --border-color: #ffcc00;
+  color: #ffcc00;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Transición suave para que el formulario suba desde abajo */
+.slide-up {
+  animation: slideUpAnimation 1.5s ease forwards;
+}
+
+@keyframes slideUpAnimation {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .forgot-password {
@@ -46,20 +127,7 @@ ion-card-title {
 }
 
 .forgot-password a {
-  color: #020241; 
-  text-decoration: none; 
-  font-size: 1rem;
-  
-}
-
-.forgot-password a:hover {
+  color: #333;
   text-decoration: none;
-  color: #3b256e;
+  font-size: 1rem;
 }
-
-/* Botones */
-ion-button {
-  --background: #072a3c;
-  color: white;
-}
-

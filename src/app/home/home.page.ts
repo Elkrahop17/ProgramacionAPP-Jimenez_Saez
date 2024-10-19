@@ -10,25 +10,29 @@ import { Router } from '@angular/router';
 export class HomePage {
   username: string;
   password: string;
+  showLogin: boolean = false; // El formulario de login inicia oculto
 
   constructor(private alertController: AlertController, private navCtrl: NavController, private router: Router) {
     this.username = "";
     this.password = "";
   }
 
+  ngOnInit() {
+    // Mostrar el formulario de login después de 5 segundos
+    setTimeout(() => {
+      this.showLogin = true;
+    }, 2000);
+  }
+
   async loginUsuario(event: Event) {
     event.preventDefault();
 
-    // Obtén la contraseña almacenada en localStorage
     const storedPassword = localStorage.getItem('password');
     
-    // Verifica si las credenciales son correctas
-    if (this.username === 'usuario' && this.password === storedPassword) {
+    if (this.username === 'di.jimeneze@duocuc.cl' && this.password === storedPassword) {
       await this.showAlert('Éxito', 'Inicio de sesión exitoso.', 1500);
       console.log("Inicio de sesión exitoso.");
-
-      this.navCtrl.navigateForward('/tabs/inicio');
-      
+      this.router.navigate(['tabs/inicio']);
     } else {
       await this.showAlert('Error', 'Credenciales incorrectas. Por favor, inténtalo de nuevo.', 1500);
       console.log("Credenciales incorrectas.");

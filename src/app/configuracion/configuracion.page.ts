@@ -15,7 +15,7 @@ export class ConfiguracionPage{
   constructor(private router: Router) { }
 
   goToProfile(){
-    this.router.navigate(['/profile']);
+    this.router.navigate(['tabs/perfil']);
   }
 
   //Sección de editar información

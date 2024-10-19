@@ -3,101 +3,35 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </header>
-
-
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="header-container">
-    <ion-icon name="grid-outline" class="bienvenido-icon"></ion-icon>
+    <ion-icon name="car-sport-outline" class="bienvenido-icon"></ion-icon>
     <div class="bienvenido-text">
       <ion-label class="bienvenido-label">
-        Bienvenido, <span class="nombre-usuario">{{nombre_usuario}}</span>
+        Bienvenido a <span class="app-name">TeLlevoAPP</span>, <span class="nombre-usuario">{{nombre_usuario}}</span>
       </ion-label>
     </div>
     <ion-icon name="person-circle-outline" class="bienvenido-icon" (click)="goToProfile()"></ion-icon>
   </div>
 
   <div class="imagen-container">
-    <img src="assets/img/imagen_inicio.jpg" alt="Imagen de inicio" class="imagen-inicio">
+    <img src="assets/img/imagen_inicio.jpg" alt="Imagen de transporte" class="imagen-inicio">
   </div>
 
   <div class="address-container">
     <ion-item>
-      <ion-label position="floating">Ingrese su dirección</ion-label>
-      <ion-input [(ngModel)]="address" placeholder="Dirección"></ion-input>
+      <ion-label position="floating">¿Dónde te recogemos?</ion-label>
+      <ion-input [(ngModel)]="address" placeholder="Ingresa tu dirección"></ion-input>
     </ion-item>
   </div>
 
-  <div class="cards-container">
-    <div 
-      class="card-item" [class.selected]="selectedCar === 'car1'" (click)="selectCar('car1')">
-      <ion-card class="card-image-container">
-        <img src="assets/img/car-sedan.png" alt="Imagen 1" class="card-image">
-      </ion-card>
-      <div class="card-info">
-        <div class="card-description">
-          <h6>Driver Antonio</h6>
-          <p>Voy en un Hyundai suv rojo, servicio excelente, comodidad garantizada</p>
-        </div>
-        <div class="card-price">
-          <p>$30.00</p>
-        </div>
-        <div class="rating-stars">
-          <ion-icon name="star" class="star"></ion-icon>
-          <ion-icon name="star" class="star"></ion-icon>
-          <ion-icon name="star" class="star"></ion-icon>
-          <ion-icon name="star" class="star"></ion-icon>
-          <ion-icon name="star-outline" class="star"></ion-icon>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-item" [ngClass]="{'selected': selectedCar === 'car2'}" (click)="selectCar('car2')">
-      <ion-card class="card-image-container">
-        <img src="assets/img/car-nissan.png" alt="Imagen 2" id="car1" class="card-image">
-      </ion-card>
-      <div class="card-info">
-        <div class="card-description">
-          <h6>Driver Alexander</h6>
-          <p>Voy en un Nissan azul, servicio excelente, comodidad garantizada, 5 estrellas</p>
-        </div>
-        <div class="card-price">
-          <p>$50.00</p>
-        </div>
-
-        <div class="rating-stars">
-          <ion-icon name="star" class="star"></ion-icon>
-          <ion-icon name="star" class="star"></ion-icon>
-          <ion-icon name="star" class="star"></ion-icon>
-          <ion-icon name="star-outline" class="star"></ion-icon>
-          <ion-icon name="star-outline" class="star"></ion-icon>
-        </div>
-
-      </div>
-    </div>
-
-
-    <div class="card-item" [ngClass]="{'selected': selectedCar === 'car3'}" (click)="selectCar('car3')">
-      <ion-card class="card-image-container">
-        <img src="assets/img/ferrari.png" alt="Imagen 3" id="car2" class="card-image">
-      </ion-card>
-      <div class="card-info">
-        <div class="card-description">
-          <h6>Driver Alejandro</h6>
-          <p>Voy en un Ferrari rojo, servicio excelente, comodidad garantizada, 5 estrellas no se aceptan tipos llamados miguel</p>
-        </div>
-        <div class="card-price">
-          <p>$40.00</p>
-        </div>
-
-        <div class="rating-stars">
-          <ion-icon name="star" class="star"></ion-icon>
-          <ion-icon name="star" class="star"></ion-icon>
-          <ion-icon name="star" class="star"></ion-icon>
-          <ion-icon name="star" class="star"></ion-icon>
-          <ion-icon name="star" class="star"></ion-icon>
-        </div>
-
-      </div>
-    </div>
+  <div class="actions-container">
+    <ion-button expand="block" color="primary" (click)="ofrecerViaje()">
+      Ofrecer mi vehículo
+    </ion-button>
+    <ion-button expand="block" color="secondary" (click)="buscarTransporte()">
+      Buscar transporte disponible
+    </ion-button>
   </div>
 </ion-content>
+
