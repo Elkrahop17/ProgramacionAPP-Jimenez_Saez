@@ -1,44 +1,27 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ViajesService } from './viajes.service'; 
 
 @Component({
   selector: 'app-servicios',
   templateUrl: './servicios.page.html',
   styleUrls: ['./servicios.page.scss'],
 })
-
 export class ServiciosPage {
   pickupLocation: string = '';
   destination: string = '';
   viajesDisponibles: any[] = [];
   searchAttempted: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private viajesService: ViajesService) {} // Inyecta el servicio
 
   buscarViajes() {
     this.searchAttempted = true;
-    
-    // Simulación de datos obtenidos del backend
-    this.viajesDisponibles = [
-      {
-        driverName: 'Carlos',
-        vehicleDetails: 'Hyundai SUV Rojo',
-        pickupLocation: 'Duoc UC',
-        destination: 'La Florida',
-        availableSeats: 3,
-        costPerPassenger: 30,
-      },
-      {
-        driverName: 'Ana',
-        vehicleDetails: 'Nissan Azul',
-        pickupLocation: 'Duoc UC',
-        destination: 'Santiago Centro',
-        availableSeats: 2,
-        costPerPassenger: 25,
-      },
-    ];
 
-    // Filtrar resultados (esto dependerá de tu backend)
+    // Obtiene los viajes desde el servicio
+    this.viajesDisponibles = this.viajesService.obtenerViajes();
+
+    // Filtrar los resultados en función de los criterios de búsqueda
     this.viajesDisponibles = this.viajesDisponibles.filter(
       (viaje) =>
         viaje.pickupLocation.toLowerCase().includes(this.pickupLocation.toLowerCase()) &&
@@ -47,8 +30,7 @@ export class ServiciosPage {
   }
 
   solicitarAsiento(viaje: any) {
-    // Lógica para solicitar un asiento en el viaje seleccionado
-    console.log('Solicitaste un asiento en el viaje de:', viaje);
+    console.log('Solicitaste un asiento en el viaje de:', viaje.driverName);
   }
 
   goToInicio() {

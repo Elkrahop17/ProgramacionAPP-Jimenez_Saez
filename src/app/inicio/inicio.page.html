@@ -3,12 +3,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </header>
+
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="header-container">
     <ion-icon name="car-sport-outline" class="bienvenido-icon"></ion-icon>
     <div class="bienvenido-text">
       <ion-label class="bienvenido-label">
-        Bienvenido a <span class="app-name">TeLlevoAPP</span>, <span class="nombre-usuario">{{nombre_usuario}}</span>
+        Bienvenido a <span class="app-name">TeLlevoAPP</span>, <br><span class="nombre-usuario">{{nombre_usuario}}</span>
       </ion-label>
     </div>
     <ion-icon name="person-circle-outline" class="bienvenido-icon" (click)="goToProfile()"></ion-icon>
@@ -32,6 +33,23 @@
     <ion-button expand="block" color="secondary" (click)="buscarTransporte()">
       Buscar transporte disponible
     </ion-button>
+  </div>
+
+  <!-- Contenedor para mostrar el clima -->
+  <div class="weather-container" *ngIf="weatherData">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Clima Actual en {{ weatherData.name }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="weather-icon">
+          <ion-icon [name]="weatherIcon"></ion-icon>
+        </div>
+        <p><strong>Temperatura:</strong> {{ weatherData.main.temp }}°C</p>
+        <p><strong>Humedad:</strong> {{ weatherData.main.humidity }}%</p>
+        <p><strong>Estado:</strong> {{ weatherData.weather[0].description | titlecase }}</p>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
 
