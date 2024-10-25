@@ -1,18 +1,37 @@
-import { Component} from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-configuracion',
   templateUrl: './configuracion.page.html',
   styleUrls: ['./configuracion.page.scss'],
 })
-export class ConfiguracionPage{
+export class ConfiguracionPage implements OnInit{
+  userEmail: string | null = null; 
+  profileImage: string | null = null;
   isModalOpen = false;
   isAppearanceModalOpen = false;
   isSecurityModalOpen = false;
   isContactsModalOpen = false;
   contacts: any[] = []
-  constructor(private router: Router) { }
+  
+  constructor(private router: Router,  private authService: AuthService) { 
+  }
+
+  ngOnInit() {
+    this.loadUserEmail(); // Cargar el correo del usuario al iniciar la página
+    this.loadProfileImage();
+  }
+
+  async loadUserEmail() {
+    this.userEmail = await this.authService.getUserEmail(); // Obtener el correo del usuario logueado
+  }
+
+   // Cargar la imagen de perfil si está disponible
+  async loadProfileImage() {
+    this.profileImage = await this.authService.getProfileImage();
+  }
 
   goToProfile(){
     this.router.navigate(['tabs/perfil']);

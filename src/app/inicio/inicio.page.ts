@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Storage } from '@ionic/storage-angular';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../services/auth.service'; 
 
 @Component({
   selector: 'app-inicio',
@@ -14,27 +14,29 @@ export class InicioPage {
   weatherData: any; 
   apiKey: string = 'd6d640ef348e9de8f0dd7196c6724a3f'; 
   weatherIcon: string = 'sunny-outline';  
+  private email: string = ''; // Aquí se almacenará el correo del usuario que inició sesión
 
-  constructor(private router: Router, private storage: Storage, private http: HttpClient) {
-    this.loadUser();
+  constructor(private router: Router, private http: HttpClient, private authService: AuthService) {
+    this.loadUser(); // Cargar el usuario al iniciar el componente
     this.getWeatherData(); // Llamada a la API para obtener los datos del clima
   }
 
   async loadUser() {
-    await this.storage.create();  
-    this.nombre_usuario = await this.storage.get('nombre_usuario') || 'Diego';
-  }
+    this.email = await this.authService.getUserEmail(); // Obtener el correo del usuario que ha iniciado sesión
+    const user = await this.authService.getUserByEmail(this.email); // Obtener el usuario por correo
 
-  async saveUser() {
-    await this.storage.set('nombre_usuario', this.nombre_usuario);  // Guarda el nombre de usuario
+    if (user) {
+      this.nombre_usuario = `${user.firstName} ${user.lastName}`; // Asignar el nombre completo
+    } else {
+      this.nombre_usuario = 'Usuario'; // Nombre por defecto
+    }
   }
-
 
   goToProfile() {
     this.router.navigate(['/tabs/perfil']);
   }
 
-   // Método para redirigir a la página de "Ofrecer Vehículo"
+  // Método para redirigir a la página de "Ofrecer Vehículo"
   ofrecerViaje() {
     this.router.navigate(['/ofrecer-vehiculo']);
   }
@@ -83,6 +85,4 @@ export class InicioPage {
         break;
     }
   }
-
-
 }
