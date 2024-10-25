@@ -19,9 +19,15 @@
   <ion-card class="profile-card">
     <ion-card-content>
       <div class="profile-details">
-        <div class="avatar">
-          <img src="assets/img/Leyton.png" alt="Avatar">
-        </div>
+        <div class="avatar" (click)="fileInput.click()">
+          <input type="file" (change)="onFileSelected($event)" #fileInput style="display: none;" />
+          <ng-container *ngIf="profileImage; else uploadIcon">
+            <img [src]="profileImage" alt="Avatar" />
+          </ng-container>
+          <ng-template #uploadIcon>
+            <ion-icon name="camera-outline" class="upload-icon"></ion-icon>
+          </ng-template>
+        </div>        
         <div class="profile-info">
           <h2>{{nombre_usuario}}</h2>
           <p><ion-icon name="location-outline"></ion-icon> {{lugar_origen}}</p>
@@ -60,11 +66,34 @@
   <div class="additional-info-container">
     <h3 class="additional-info-title">Información Adicional</h3>
     <div class="additional-info">
-      <p><ion-icon name="briefcase-outline"></ion-icon> Ingeniero Informático</p>
-      <p><ion-icon name="time-outline"></ion-icon> 1 año de experiencia</p>
-      <p><ion-icon name="mail-outline"></ion-icon> Miguel.L&#64;cochino.com</p>
+      <p><ion-icon name="briefcase-outline"></ion-icon> {{ocupacion || 'Click para agregar ocupación'}} <ion-icon name="create-outline" (click)="openEditModal()"></ion-icon></p>
+      <p><ion-icon name="time-outline"></ion-icon> {{experiencia || 'Click para agregar experiencia'}} <ion-icon name="create-outline" (click)="openEditModal()"></ion-icon></p>
+      <p><ion-icon name="mail-outline"></ion-icon> {{correo || 'Click para agregar correo'}} <ion-icon name="create-outline" (click)="openEditModal()"></ion-icon></p>
     </div>
   </div>
 
+  <!-- Modal -->
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="dismissModal()">
+    <ng-template>
+      <div class="modal-content">
+        <h3>Editar Información</h3>
+        <ion-item>
+          <ion-icon name="briefcase-outline" slot="start"></ion-icon>
+          <ion-input placeholder="Ingresa tu ocupación" [(ngModel)]="ocupacion"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="time-outline" slot="start"></ion-icon>
+          <ion-input placeholder="Años de experiencia" [(ngModel)]="experiencia"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-input placeholder="Ingresa tu correo" [(ngModel)]="correo"></ion-input>
+        </ion-item>
+        <ion-button expand="full" (click)="saveInformation()">Guardar Información</ion-button>
+        <ion-button expand="full" (click)="dismissModal()">Cancelar</ion-button>
+      </div>
+    </ng-template>
+  </ion-modal>
+    
 
 </ion-content>

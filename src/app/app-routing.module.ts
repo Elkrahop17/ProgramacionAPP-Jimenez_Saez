@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './guards/auth.guard';
+
 
 
 const routes: Routes = [
@@ -15,13 +15,12 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule),
-    canActivate: [AuthGuard]
   },
   
   {
     path: 'configuracion',
     loadChildren: () => import('./configuracion/configuracion.module').then( m => m.ConfiguracionPageModule),
-    canActivate: [AuthGuard]
+
   },
   {
     path: 'servicios',
@@ -47,7 +46,12 @@ const routes: Routes = [
   {
     path: 'ofrecer-vehiculo',
     loadChildren: () => import('./ofrecer-vehiculo/ofrecer-vehiculo.module').then( m => m.OfrecerVehiculoPageModule)
+  },
+  {
+    path: 'crear-usuario',
+    loadChildren: () => import('./crear-usuario/crear-usuario.module').then( m => m.CrearUsuarioPageModule)
   }
+
 
 ];
 

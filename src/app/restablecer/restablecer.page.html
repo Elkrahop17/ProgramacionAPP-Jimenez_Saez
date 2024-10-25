@@ -1,41 +1,49 @@
-<header>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-</header>
-
 <ion-content [fullscreen]="true">
-  <div class="header">
-    <ion-button class="back-button" (click)="GoToBack()">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-    </ion-button>
-    <h1 class="page-title">Restablecer contraseña</h1>
-  </div>
-
-  <div class="restablecer-container">
-    <div class="header-container">
-      <h1>Restablece tu Contraseña</h1>
-      <p>Introduce y confirma tu nueva contraseña</p>
+  <!-- Contenedor general con la imagen de fondo -->
+  <div id="background-container">
+    <img src="assets/img/san-joaquin.jpg" alt="Fondo edificio DuocUC" id="background-image">
+    
+    <!-- Logo centrado -->
+    <div id="logo-container">
+      <img src="assets/img/duoc.png" alt="Logo DuocUC" id="duoc-logo">
     </div>
 
-    <ion-card class="custom-card">
-      <ion-card-content>
-        <form (submit)="cambiarContrasena($event)">
-          <ion-item class="custom-input-item">
-            <ion-label position="floating">Nueva Contraseña</ion-label>
-            <ion-input type="password" [(ngModel)]="nuevaContrasena" name="nuevaContrasena" required></ion-input>
-          </ion-item>
+    <!-- Formulario para restablecer contraseña -->
+    <div id="content-container" class="slide-up">
+      <div class="reset-card">
+        <ion-card-header><br>
+          
+          <ion-card-title class="ion-text-center">Restablecer Contraseña</ion-card-title>
+          <p class="ion-text-center">Introduce tu correo y la nueva contraseña</p>
+        </ion-card-header>
 
-          <ion-item class="custom-input-item">
-            <ion-label position="floating">Confirmar Contraseña</ion-label>
-            <ion-input type="password" [(ngModel)]="confirmarContrasena" name="confirmarContrasena" required></ion-input>
-          </ion-item>
+        <ion-card-content>
+          <form (submit)="cambiarContrasena($event)">
+            <div class="input-container">
+              <ion-item class="custom-input-item">
+                <ion-icon name="mail-outline" slot="start"></ion-icon>
+                <ion-input type="email" placeholder="Correo" [(ngModel)]="email" name="email" required></ion-input>
+              </ion-item>
 
-          <ion-button expand="block" type="submit" class="custom-button">Cambiar Contraseña</ion-button>
-        </form>
-      </ion-card-content>
-    </ion-card>
+              <ion-item class="custom-input-item">
+                <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+                <ion-input type="password" placeholder="Nueva Contraseña" [(ngModel)]="nuevaContrasena" name="nuevaContrasena" required></ion-input>
+              </ion-item>
+
+              <ion-item class="custom-input-item">
+                <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+                <ion-input type="password" placeholder="Confirmar Contraseña" [(ngModel)]="confirmarContrasena" name="confirmarContrasena" required></ion-input>
+              </ion-item>
+            </div>
+
+            <ion-button expand="block" type="submit" class="reset-button">Restablecer Contraseña</ion-button>
+          </form>
+
+          <div class="back-to-login">
+            <a (click)="GoToBack()">Volver al inicio de sesión</a>
+          </div>
+        </ion-card-content>
+      </div>
+    </div>
   </div>
 </ion-content>
-
-

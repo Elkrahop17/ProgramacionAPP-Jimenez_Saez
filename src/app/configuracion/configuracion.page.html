@@ -14,10 +14,17 @@
 
     <div class="user-info">
       <ion-avatar class="user-avatar">
-        <img src="assets/img/Leyton.png" alt="Imagen de Usuario">
+        <!-- Verificamos si existe una imagen de perfil -->
+        <ng-container *ngIf="profileImage; else cameraIcon">
+          <img [src]="profileImage" alt="Imagen de Usuario">
+        </ng-container>
+        <!-- Si no hay imagen de perfil, mostramos el ícono de la cámara -->
+        <ng-template #cameraIcon>
+          <ion-icon name="camera-outline" class="camera-icon"></ion-icon>
+        </ng-template>
       </ion-avatar>
       <div class="user-details">
-        <p class="user-email">Miguel.L&#64;cochino.com</p>
+        <p class="user-email">{{ userEmail || 'Email no disponible' }}</p>
         <ion-icon name="chevron-forward-outline" class="redirect-icon"></ion-icon>
       </div>
     </div>
