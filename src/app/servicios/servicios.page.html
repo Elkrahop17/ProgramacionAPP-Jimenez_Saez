@@ -1,18 +1,10 @@
-<header>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-</header>
-
 <ion-content [fullscreen]="true" class="ion-padding">
-
   <div class="header">
     <ion-button class="back-button" (click)="goToInicio()">
       <ion-icon name="arrow-back-outline"></ion-icon>
     </ion-button>
     <h1 class="page-title">Transporte Disponible</h1>
   </div>
-
 
   <div class="search-container">
     <ion-item class="search-input">
@@ -29,7 +21,7 @@
   </div>
 
   <div *ngIf="viajesDisponibles.length > 0" class="results-container">
-    <ion-card *ngFor="let viaje of viajesDisponibles" (click)="solicitarAsiento(viaje)" class="viaje-card">
+    <ion-card *ngFor="let viaje of viajesDisponibles">
       <ion-card-header>
         <ion-card-title>{{ viaje.driverName }} - {{ viaje.vehicleDetails }}</ion-card-title>
       </ion-card-header>
@@ -38,6 +30,7 @@
         <p>Destino: {{ viaje.destination }}</p>
         <p>Asientos disponibles: {{ viaje.availableSeats }}</p>
         <p>Costo por pasajero: {{ viaje.costPerPassenger }}</p>
+        <ion-button expand="full" (click)="confirmarCompra(viaje)">Agregar</ion-button>
       </ion-card-content>
     </ion-card>
   </div>
@@ -46,5 +39,3 @@
     <p>No se encontraron transportes disponibles</p>
   </div>
 </ion-content>
-
-
