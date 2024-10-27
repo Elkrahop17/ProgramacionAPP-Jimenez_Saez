@@ -56,10 +56,6 @@ const routes: Routes = [
     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
 
-  {
-    path: '**', // Ruta comodín para URLs no encontradas
-    redirectTo: 'not-found'
-  }
   
 
 
