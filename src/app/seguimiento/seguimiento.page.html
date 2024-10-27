@@ -1,0 +1,34 @@
+<ion-content class="ion-padding">
+  <!-- Encabezado con botón de retroceso y título -->
+  <div class="header">
+    <ion-button class="back-button" (click)="goBack()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <h1 class="page-title">Seguimiento del Viaje</h1>
+  </div>
+
+  <!-- Tarjeta de estado del viaje -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Estado del Viaje</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Información del conductor y vehículo -->
+      <div class="status">
+        <p><strong>Conductor:</strong> {{ viaje?.driverName }}</p>
+        <p><strong>Vehículo:</strong> {{ viaje?.vehicleDetails }}</p>
+      </div>
+
+      <!-- Barra de progreso del viaje -->
+      <ion-progress-bar [value]="progreso" color="success"></ion-progress-bar>
+
+      <!-- Lista de pasos del viaje con icono de check para los completados -->
+      <div class="steps">
+        <ion-item *ngFor="let step of pasos; let i = index">
+          <ion-label [class.active]="i <= pasoActual">{{ step }}</ion-label>
+          <ion-icon *ngIf="i <= pasoActual" name="checkmark-circle" color="success"></ion-icon>
+        </ion-item>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

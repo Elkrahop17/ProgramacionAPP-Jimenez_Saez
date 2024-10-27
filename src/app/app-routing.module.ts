@@ -50,7 +50,19 @@ const routes: Routes = [
   {
     path: 'crear-usuario',
     loadChildren: () => import('./crear-usuario/crear-usuario.module').then( m => m.CrearUsuarioPageModule)
+  },  {
+    path: 'confirmar-compra',
+    loadChildren: () => import('./confirmar-compra/confirmar-compra.module').then( m => m.ConfirmarCompraPageModule)
+  },
+  {
+    path: 'metodo-pago',
+    loadChildren: () => import('./metodo-pago/metodo-pago.module').then( m => m.MetodoPagoPageModule)
+  },
+  {
+    path: 'seguimiento',
+    loadChildren: () => import('./seguimiento/seguimiento.module').then( m => m.SeguimientoPageModule)
   }
+
 
 
 ];

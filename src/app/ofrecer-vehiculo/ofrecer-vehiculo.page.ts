@@ -1,3 +1,5 @@
+// src/app/ofrecer-vehiculo/ofrecer-vehiculo.page.ts
+
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ViajesService } from '../servicios/viajes.service';
@@ -7,7 +9,6 @@ import { ViajesService } from '../servicios/viajes.service';
   templateUrl: './ofrecer-vehiculo.page.html',
   styleUrls: ['./ofrecer-vehiculo.page.scss'],
 })
-
 export class OfrecerVehiculoPage {
   driverName: string = '';
   vehicleBrand: string = '';
@@ -19,7 +20,6 @@ export class OfrecerVehiculoPage {
   costPerPassenger: number | null = null;
 
   constructor(private router: Router, private viajesService: ViajesService) {} // Inyecta el servicio
-
 
   closePage() {
     this.router.navigate(['tabs/inicio']);
@@ -39,10 +39,14 @@ export class OfrecerVehiculoPage {
       // Guarda el viaje en el servicio
       this.viajesService.agregarViaje(nuevoViaje);
 
-      // Navegar a la página de inicio o hacer otra acción
-      this.router.navigate(['/tabs/inicio']);
+      // Almacena el viaje actual en el servicio para que esté disponible en la página de seguimiento
+      this.viajesService.setViajeActual(nuevoViaje);
+
+      // Navega a la página de seguimiento
+      this.router.navigate(['tabs/servicio']);
     } else {
       console.log('Por favor, completa todos los campos.');
     }
   }
 }
+

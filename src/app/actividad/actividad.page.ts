@@ -1,42 +1,23 @@
-import { Component } from '@angular/core';
-import { formatDate } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PedidosService } from '../servicios/pedidos.service'; // Importa el servicio de pedidos
 
 @Component({
   selector: 'app-actividad',
   templateUrl: './actividad.page.html',
   styleUrls: ['./actividad.page.scss'],
 })
-export class ActividadPage {
+export class ActividadPage implements OnInit {
+  pedidos: any[] = []; // Array para almacenar los pedidos desde el servicio
 
-  // Datos de ejemplo para los pedidos
-  pedidos = [
-    { 
-      title: 'Transporte Compartido', 
-      nombreUsuario: 'Juan Pérez',  
-      modeloAuto: 'Toyota Corolla', 
-      fechaPedido: formatDate(new Date(), 'dd/MM/yyyy', 'en'), 
-      estado: 'Completado', 
-      price: '$10.000', 
-      rating: [1, 1, 1, 1, 0] 
-    },
-    { 
-      title: 'Servicio Premium', 
-      nombreUsuario: 'Sofía González', 
-      modeloAuto: 'Mercedes-Benz Clase C', 
-      fechaPedido: formatDate(new Date(), 'dd/MM/yyyy', 'en'), 
-      estado: 'Pendiente', 
-      price: '$15.000', 
-      rating: [1, 1, 1, 1, 1] 
-    }
-  ];
+  constructor(private router: Router, private pedidosService: PedidosService) {} // Inyecta el servicio de pedidos
 
-  // Navegar de vuelta a la página de inicio
-  goToInicio() {
-    this.router.navigate(['tabs/inicio']); 
+  ngOnInit() {
+    // Carga los pedidos almacenados en el servicio al iniciar la página
+    this.pedidos = this.pedidosService.obtenerPedidos();
   }
 
-  constructor(private router: Router) { }
-
+  goToInicio() {
+    this.router.navigate(['tabs/inicio']);
+  }
 }
-

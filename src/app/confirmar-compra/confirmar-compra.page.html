@@ -1,0 +1,24 @@
+<ion-content class="ion-padding">
+  <div class="header">
+    <ion-button class="back-button" (click)="goBack()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <h1 class="page-title">Confirmar Compra</h1>
+  </div>
+
+  <ion-card *ngIf="viaje" class="viaje-card">
+    <ion-card-header>
+      <ion-card-title>Detalles del Viaje</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Conductor:</strong> {{ viaje.driverName }}</p>
+      <p><strong>Vehículo:</strong> {{ viaje.vehicleDetails }}</p>
+      <p><strong>Origen:</strong> {{ viaje.pickupLocation }}</p>
+      <p><strong>Destino:</strong> {{ viaje.destination }}</p>
+      <p><strong>Asientos Disponibles:</strong> {{ viaje.availableSeats }}</p>
+      <p><strong>Costo por Pasajero:</strong> ${{ viaje.costPerPassenger }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" class="confirm-btn" (click)="confirmarCompra()">Confirmar y Comprar</ion-button>
+</ion-content>

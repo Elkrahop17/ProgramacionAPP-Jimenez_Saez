@@ -1,0 +1,60 @@
+<ion-content class="ion-padding">
+  <div class="header">
+    <ion-button class="back-button" (click)="goBack()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <h1 class="page-title">Método de Pago</h1>
+  </div>
+
+  <ion-list>
+    <ion-radio-group [(ngModel)]="metodoSeleccionado">
+      <ion-list-header>
+        <ion-label>Elige un método de pago:</ion-label>
+      </ion-list-header>
+
+      <ion-item *ngFor="let metodo of metodosPago">
+        <ion-label>{{ metodo.nombre }}</ion-label>
+        <ion-radio slot="start" [value]="metodo.valor"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <!-- Formulario de tarjeta de crédito/débito -->
+  <div *ngIf="metodoSeleccionado === 'tarjeta'" class="card-details">
+    <ion-item>
+      <ion-label position="floating">Número de Tarjeta</ion-label>
+      <ion-input type="text" [(ngModel)]="numeroTarjeta"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Fecha de Expiración (MM/AA)</ion-label>
+      <ion-input type="text" [(ngModel)]="fechaExpiracion"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Código de Seguridad</ion-label>
+      <ion-input type="password" [(ngModel)]="codigoSeguridad"></ion-input>
+    </ion-item>
+  </div>
+
+  <!-- Formulario de PayPal -->
+  <div *ngIf="metodoSeleccionado === 'paypal'" class="paypal-details">
+    <ion-item>
+      <ion-label position="floating">Correo Electrónico de PayPal</ion-label>
+      <ion-input type="email" [(ngModel)]="correoPaypal"></ion-input>
+    </ion-item>
+  </div>
+
+  <!-- Formulario de Transferencia Bancaria -->
+  <div *ngIf="metodoSeleccionado === 'transferencia'" class="transfer-details">
+    <ion-item>
+      <ion-label position="floating">Número de Cuenta</ion-label>
+      <ion-input type="text" [(ngModel)]="numeroCuenta"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nombre del Banco</ion-label>
+      <ion-input type="text" [(ngModel)]="nombreBanco"></ion-input>
+    </ion-item>
+  </div>
+
+  <ion-button expand="block" class="confirm-btn" (click)="procesarPago()">Confirmar y Pagar</ion-button>
+</ion-content>
+
