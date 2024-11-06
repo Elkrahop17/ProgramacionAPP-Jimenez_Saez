@@ -22,8 +22,7 @@ const routes: Routes = [
   
   {
     path: 'configuracion',
-    loadChildren: () => import('./configuracion/configuracion.module').then( m => m.ConfiguracionPageModule),
-    canActivate: [AuthGuard]
+    loadChildren: () => import('./configuracion/configuracion.module').then( m => m.ConfiguracionPageModule)
   },
   {
     path: 'servicios',
@@ -46,38 +45,31 @@ const routes: Routes = [
   },
   {
     path: 'restablecer',
-    loadChildren: () => import('./restablecer/restablecer.module').then( m => m.RestablecerPageModule),
-    canActivate: [AuthGuard]
+    loadChildren: () => import('./restablecer/restablecer.module').then( m => m.RestablecerPageModule)
   },
   {
     path: 'ofrecer-vehiculo',
     loadChildren: () => import('./ofrecer-vehiculo/ofrecer-vehiculo.module').then( m => m.OfrecerVehiculoPageModule),
-    canActivate: [AuthGuard]
   },
   {
     path: 'crear-usuario',
-    loadChildren: () => import('./crear-usuario/crear-usuario.module').then( m => m.CrearUsuarioPageModule),
-    canActivate: [AuthGuard]
+    loadChildren: () => import('./crear-usuario/crear-usuario.module').then( m => m.CrearUsuarioPageModule)
   },
   {
     path: 'confirmar-compra',
     loadChildren: () => import('./confirmar-compra/confirmar-compra.module').then( m => m.ConfirmarCompraPageModule),
-    canActivate: [AuthGuard]
   },
   {
     path: 'metodo-pago',
     loadChildren: () => import('./metodo-pago/metodo-pago.module').then( m => m.MetodoPagoPageModule),
-    canActivate: [AuthGuard]
   },
   {
     path: 'seguimiento',
     loadChildren: () => import('./seguimiento/seguimiento.module').then( m => m.SeguimientoPageModule),
-    canActivate: [AuthGuard]
   },
   {
     path: 'not-found',
     loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule),
-    canActivate: [AuthGuard]
   },
 
   {
