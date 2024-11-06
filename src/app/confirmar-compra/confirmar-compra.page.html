@@ -11,14 +11,33 @@
       <ion-card-title>Detalles del Viaje</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p><strong>Conductor:</strong> {{ viaje.driverName }}</p>
-      <p><strong>Vehículo:</strong> {{ viaje.vehicleDetails }}</p>
-      <p><strong>Origen:</strong> {{ viaje.pickupLocation }}</p>
-      <p><strong>Destino:</strong> {{ viaje.destination }}</p>
-      <p><strong>Asientos Disponibles:</strong> {{ viaje.availableSeats }}</p>
-      <p><strong>Costo por Pasajero:</strong> ${{ viaje.costPerPassenger }}</p>
+      <div class="viaje-detail">
+        <ion-icon name="person-outline" class="detail-icon"></ion-icon>
+        <p><strong>Conductor:</strong> {{ viaje.driverName }}</p>
+      </div>
+      <div class="viaje-detail">
+        <ion-icon name="car-outline" class="detail-icon"></ion-icon>
+        <p><strong>Vehículo:</strong> {{ viaje.vehicleDetails }}</p>
+      </div>
+      <div class="viaje-detail">
+        <ion-icon name="location-outline" class="detail-icon"></ion-icon>
+        <p><strong>Origen:</strong> {{ viaje.pickupLocation }}</p>
+      </div>
+      <div class="viaje-detail">
+        <ion-icon name="map-outline" class="detail-icon"></ion-icon>
+        <p><strong>Destino:</strong> {{ viaje.destination }}</p>
+      </div>
+      <div class="viaje-detail">
+        <ion-icon name="people-outline" class="detail-icon"></ion-icon>
+        <p><strong>Asientos Disponibles:</strong> {{ viaje.availableSeats }}</p>
+      </div>
+      <div class="viaje-detail">
+        <ion-icon name="cash-outline" class="detail-icon"></ion-icon>
+        <p><strong>Costo por Pasajero:</strong> ${{ viaje.costPerPassenger }}</p>
+      </div>
     </ion-card-content>
   </ion-card>
 
   <ion-button expand="block" class="confirm-btn" (click)="confirmarCompra()">Confirmar y Comprar</ion-button>
 </ion-content>
+

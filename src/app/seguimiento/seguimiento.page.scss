@@ -34,8 +34,16 @@
 
 
 .status {
-    margin-bottom: 20px;
-    font-family: 'Urbanist', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #666;
+}
+
+.status p ion-icon {
+    margin-right: 8px;
+    color: #4CAF50;
+    font-size: 18px;
 }
 
 .steps {

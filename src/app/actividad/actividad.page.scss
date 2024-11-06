@@ -33,52 +33,51 @@
 }
 
 /* Estilo de las cards */
-.order-container,
-.service-container {
+.order-container {
   display: flex;
   flex-direction: column;
   gap: 15px; 
   padding: 15px;
 }
 
-.order-card,
-.service-card {
+.order-card {
   border-radius: 15px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
 }
 
-.order-card:hover,
-.service-card:hover {
+.order-card:hover {
   transform: translateY(-5px); 
 }
 
-.order-card ion-card-header,
-.service-card ion-card-header {
+.order-card ion-card-header {
   background-color: #e4e4e65d; 
   border-radius: 15px 15px 0 0;
   padding: 15px;
-  
 }
 
-.order-card ion-card-title,
-.service-card ion-card-title {
+.order-card ion-card-title {
   font-size: 1.3rem;
   font-weight: 600;
   color: #000000; 
 }
 
 /* Estilo para el contenido de las cards */
-.order-card ion-card-content,
-.service-card ion-card-content {
+.order-card ion-card-content {
   padding: 10px 15px;
 }
 
-.order-card p,
-.service-card p {
+.order-details p {
   margin: 5px 0;
   font-size: 0.95rem;
   color: #555;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 8px;
+  color: #4CAF50; /* Cambia el color del icono para que combine con el estilo */
 }
 
 /* Estilo de los botones dentro de las cards */
