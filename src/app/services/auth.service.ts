@@ -83,4 +83,9 @@ export class AuthService {
     });
   }
 
+  isAuthenticated(): Promise<boolean> {
+    
+    return Promise.resolve(false); 
+  }
+
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 
 
@@ -10,25 +11,29 @@ const routes: Routes = [
   },
   {
     path: 'inicio',
-    loadChildren: () => import('./inicio/inicio.module').then(m => m.InicioPageModule)
+    loadChildren: () => import('./inicio/inicio.module').then(m => m.InicioPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule),
+    canActivate: [AuthGuard]
   },
   
   {
     path: 'configuracion',
     loadChildren: () => import('./configuracion/configuracion.module').then( m => m.ConfiguracionPageModule),
-
+    canActivate: [AuthGuard]
   },
   {
     path: 'servicios',
-    loadChildren: () => import('./servicios/servicios.module').then( m => m.ServiciosPageModule)
+    loadChildren: () => import('./servicios/servicios.module').then( m => m.ServiciosPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'actividad',
-    loadChildren: () => import('./actividad/actividad.module').then( m => m.ActividadPageModule)
+    loadChildren: () => import('./actividad/actividad.module').then( m => m.ActividadPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'tabs',
@@ -41,31 +46,38 @@ const routes: Routes = [
   },
   {
     path: 'restablecer',
-    loadChildren: () => import('./restablecer/restablecer.module').then( m => m.RestablecerPageModule)
+    loadChildren: () => import('./restablecer/restablecer.module').then( m => m.RestablecerPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'ofrecer-vehiculo',
-    loadChildren: () => import('./ofrecer-vehiculo/ofrecer-vehiculo.module').then( m => m.OfrecerVehiculoPageModule)
+    loadChildren: () => import('./ofrecer-vehiculo/ofrecer-vehiculo.module').then( m => m.OfrecerVehiculoPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'crear-usuario',
-    loadChildren: () => import('./crear-usuario/crear-usuario.module').then( m => m.CrearUsuarioPageModule)
+    loadChildren: () => import('./crear-usuario/crear-usuario.module').then( m => m.CrearUsuarioPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'confirmar-compra',
-    loadChildren: () => import('./confirmar-compra/confirmar-compra.module').then( m => m.ConfirmarCompraPageModule)
+    loadChildren: () => import('./confirmar-compra/confirmar-compra.module').then( m => m.ConfirmarCompraPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'metodo-pago',
-    loadChildren: () => import('./metodo-pago/metodo-pago.module').then( m => m.MetodoPagoPageModule)
+    loadChildren: () => import('./metodo-pago/metodo-pago.module').then( m => m.MetodoPagoPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'seguimiento',
-    loadChildren: () => import('./seguimiento/seguimiento.module').then( m => m.SeguimientoPageModule)
+    loadChildren: () => import('./seguimiento/seguimiento.module').then( m => m.SeguimientoPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'not-found',
-    loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
+    loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule),
+    canActivate: [AuthGuard]
   },
 
   {
