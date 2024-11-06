@@ -17,7 +17,9 @@ export class AuthService {
   private usersKey = 'users'; // Clave para almacenar la lista de usuarios
   private profileImageKey = 'profileImage';
 
-  constructor(private storage: Storage) { }
+  constructor(private storage: Storage) { 
+    this.storage.create();
+  }
 
   async registerUser(user: any) {
     const users = await this.getUsers(); // Obtener la lista de usuarios
@@ -44,9 +46,10 @@ export class AuthService {
     await this.storage.set('loggedInUserEmail', email); // Almacena el correo del usuario que ha iniciado sesión
   }
 
-  async getUserEmail() {
-    return await this.storage.get('loggedInUserEmail'); // Obtiene el correo del usuario que ha iniciado sesión
+  async getUserEmail(): Promise<string | null> {
+    return await this.storage.get('loggedInUserEmail');
   }
+  
 
    // Actualizar usuario
   async updateUser(updatedUser: any): Promise<void> {
@@ -84,9 +87,9 @@ export class AuthService {
   }
 
    
-   async isLoggedIn(): Promise<boolean> {
+  async isAuthenticated(): Promise<boolean> {
     const email = await this.getUserEmail();
-    return !!email; // Retorna true si hay un email (usuario logueado)
+    return Promise.resolve(false); 
   }
-
+  
 }

@@ -20,9 +20,10 @@ export class InicioPage {
     this.loadUser(); // Cargar el usuario al iniciar el componente
     this.getWeatherData(); // Llamada a la API para obtener los datos del clima
   }
+  
 
   async loadUser() {
-    this.email = await this.authService.getUserEmail(); // Obtener el correo del usuario que ha iniciado sesión
+    this.email = (await this.authService.getUserEmail()) || ''; // Obtener el correo del usuario que ha iniciado sesión
     const user = await this.authService.getUserByEmail(this.email); // Obtener el usuario por correo
 
     if (user) {
