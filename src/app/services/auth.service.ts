@@ -83,9 +83,10 @@ export class AuthService {
     });
   }
 
-  isAuthenticated(): Promise<boolean> {
-    
-    return Promise.resolve(false); 
+   
+   async isLoggedIn(): Promise<boolean> {
+    const email = await this.getUserEmail();
+    return !!email; // Retorna true si hay un email (usuario logueado)
   }
 
 }

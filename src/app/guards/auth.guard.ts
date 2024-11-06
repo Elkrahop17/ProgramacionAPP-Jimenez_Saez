@@ -1,36 +1,21 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private alertController: AlertController
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   async canActivate(): Promise<boolean> {
-    const isAuthenticated = await this.authService.isAuthenticated();
-    if (!isAuthenticated) {
-      // Muestra alerta
-      const alert = await this.alertController.create({
-        header: 'Acceso Restringido',
-        message: 'Debes iniciar sesión para acceder a esta página.',
-        buttons: ['OK']
-      });
-      await alert.present();
-
-      // Redirige al login
-      this.router.navigate(['/home']);
+    const isLoggedIn = await this.authService.isLoggedIn();
+    if (isLoggedIn) {
+      return true;
+    } else {
+      this.router.navigate(['/login']);
+      alert("Necesita iniciar sesión para acceder a esta página.");
       return false;
     }
-    return true;
   }
 }
-
-
