@@ -1,55 +1,80 @@
-
 * {
     font-family: 'Urbanist', sans-serif;
 }
 
 .header {
-display: flex;
-align-items: center;
-justify-content: center;
-padding: 16px;
-position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  position: relative;
 }
 
 .back-button {
-    position: absolute;
-    top: 8px;
-    left: 16px;
-    --background: transparent; 
-    --border: none;
-    --box-shadow: none; 
-    padding: 0; 
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  --background: transparent;
+  --border: none;
+  --box-shadow: none;
+  padding: 0;
 }
 
 .back-button ion-icon, .settings-button ion-icon {
-    color: #000000;
+  color: #000000;
 }
+
 
 .page-title {
-    font-size: 22px;
-    color: #000;
-    margin: 0;
-    text-align: center;
+  font-size: 22px;
+  color: #000;
+  margin: 0;
+  text-align: center;
 }
 
+.method-icon {
+  font-size: 24px;
+  margin-right: 8px;
+}
 
 .card-details, .paypal-details, .transfer-details {
-margin-top: 20px;
+  margin-top: 20px;
 }
 
-.card-details ion-item,
-.paypal-details ion-item,
-.transfer-details ion-item {
---background: #ffffff;
---box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-border-radius: 8px;
+.card-details ion-card,
+.paypal-details ion-card,
+.transfer-details ion-card {
+  --background: #ffffff;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.card-details ion-card-header,
+.paypal-details ion-card-header,
+.transfer-details ion-card-header {
+  --background: #f1f1f1;
+  padding: 16px;
+  border-radius: 8px 8px 0 0;
+}
+
+.card-details ion-card-title,
+.paypal-details ion-card-title,
+.transfer-details ion-card-title {
+  font-size: 18px;
+  color: #333;
 }
 
 .confirm-btn {
-margin-top: 20px;
---background: #4CAF50;
-font-family: 'Urbanist', sans-serif;
-border-radius: 8px;
-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+  --background: #4CAF50;
+  font-family: 'Urbanist', sans-serif;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
+ion-item {
+  --background: #ffffff;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-bottom: 10px;
+}

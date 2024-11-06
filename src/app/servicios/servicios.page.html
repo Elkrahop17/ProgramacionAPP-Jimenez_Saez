@@ -21,15 +21,35 @@
   </div>
 
   <div *ngIf="viajesDisponibles.length > 0" class="results-container">
-    <ion-card *ngFor="let viaje of viajesDisponibles">
+    <ion-card *ngFor="let viaje of viajesDisponibles" class="viaje-card">
       <ion-card-header>
-        <ion-card-title>{{ viaje.driverName }} - {{ viaje.vehicleDetails }}</ion-card-title>
+        <ion-card-title>
+          <ion-icon name="car-sport-outline" slot="start"></ion-icon>
+          {{ viaje.driverName }} - {{ viaje.vehicleDetails }}
+        </ion-card-title>
       </ion-card-header>
+
       <ion-card-content>
-        <p>Origen: {{ viaje.pickupLocation }}</p>
-        <p>Destino: {{ viaje.destination }}</p>
-        <p>Asientos disponibles: {{ viaje.availableSeats }}</p>
-        <p>Costo por pasajero: {{ viaje.costPerPassenger }}</p>
+        <div class="viaje-info">
+          <ion-icon name="location-outline" class="viaje-icon"></ion-icon>
+          <p>Origen: {{ viaje.pickupLocation }}</p>
+        </div>
+
+        <div class="viaje-info">
+          <ion-icon name="navigate-outline" class="viaje-icon"></ion-icon>
+          <p>Destino: {{ viaje.destination }}</p>
+        </div>
+
+        <div class="viaje-info">
+          <ion-icon name="people-outline" class="viaje-icon"></ion-icon>
+          <p>Asientos disponibles: {{ viaje.availableSeats }}</p>
+        </div>
+
+        <div class="viaje-info">
+          <ion-icon name="cash-outline" class="viaje-icon"></ion-icon>
+          <p>Costo por pasajero: {{ viaje.costPerPassenger }}</p>
+        </div>
+
         <ion-button expand="full" (click)="confirmarCompra(viaje)">Agregar</ion-button>
       </ion-card-content>
     </ion-card>

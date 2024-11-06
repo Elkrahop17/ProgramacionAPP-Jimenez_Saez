@@ -13,6 +13,7 @@
       </ion-list-header>
 
       <ion-item *ngFor="let metodo of metodosPago">
+        <ion-icon [name]="metodo.icono" slot="start" class="method-icon"></ion-icon>
         <ion-label>{{ metodo.nombre }}</ion-label>
         <ion-radio slot="start" [value]="metodo.valor"></ion-radio>
       </ion-item>
@@ -21,40 +22,60 @@
 
   <!-- Formulario de tarjeta de crédito/débito -->
   <div *ngIf="metodoSeleccionado === 'tarjeta'" class="card-details">
-    <ion-item>
-      <ion-label position="floating">Número de Tarjeta</ion-label>
-      <ion-input type="text" [(ngModel)]="numeroTarjeta"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Fecha de Expiración (MM/AA)</ion-label>
-      <ion-input type="text" [(ngModel)]="fechaExpiracion"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Código de Seguridad</ion-label>
-      <ion-input type="password" [(ngModel)]="codigoSeguridad"></ion-input>
-    </ion-item>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Detalles de la Tarjeta</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Número de Tarjeta</ion-label>
+          <ion-input type="text" [(ngModel)]="numeroTarjeta"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Fecha de Expiración (MM/AA)</ion-label>
+          <ion-input type="text" [(ngModel)]="fechaExpiracion"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Código de Seguridad</ion-label>
+          <ion-input type="password" [(ngModel)]="codigoSeguridad"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
   </div>
 
   <!-- Formulario de PayPal -->
   <div *ngIf="metodoSeleccionado === 'paypal'" class="paypal-details">
-    <ion-item>
-      <ion-label position="floating">Correo Electrónico de PayPal</ion-label>
-      <ion-input type="email" [(ngModel)]="correoPaypal"></ion-input>
-    </ion-item>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Detalles de PayPal</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Correo Electrónico de PayPal</ion-label>
+          <ion-input type="email" [(ngModel)]="correoPaypal"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
   </div>
 
   <!-- Formulario de Transferencia Bancaria -->
   <div *ngIf="metodoSeleccionado === 'transferencia'" class="transfer-details">
-    <ion-item>
-      <ion-label position="floating">Número de Cuenta</ion-label>
-      <ion-input type="text" [(ngModel)]="numeroCuenta"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Nombre del Banco</ion-label>
-      <ion-input type="text" [(ngModel)]="nombreBanco"></ion-input>
-    </ion-item>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Detalles de Transferencia Bancaria</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Número de Cuenta</ion-label>
+          <ion-input type="text" [(ngModel)]="numeroCuenta"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Nombre del Banco</ion-label>
+          <ion-input type="text" [(ngModel)]="nombreBanco"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
   </div>
 
   <ion-button expand="block" class="confirm-btn" (click)="procesarPago()">Confirmar y Pagar</ion-button>
 </ion-content>
-

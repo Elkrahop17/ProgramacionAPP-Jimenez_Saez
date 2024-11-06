@@ -1,9 +1,3 @@
-<header>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-</header>
-
 <ion-content>
   <!-- Botón de retroceso y título -->
   <div class="header">
@@ -23,10 +17,12 @@
         </div>
       </ion-card-header>
       <ion-card-content>
-        <p><strong>Pedido por:</strong> {{ pedido.nombreUsuario }}</p>
-        <p><strong>Modelo de Auto:</strong> {{ pedido.modeloAuto }}</p>
-        <p><strong>Fecha:</strong> {{ pedido.fechaPedido }}</p>
-        <p><strong>Estado:</strong> <strong>{{ pedido.estado }}</strong></p>
+        <div class="order-details">
+          <p><ion-icon name="person-outline" class="icon"></ion-icon><strong>Pedido por:</strong> {{ pedido.nombreUsuario }}</p>
+          <p><ion-icon name="car-outline" class="icon"></ion-icon><strong>Modelo:</strong> {{ pedido.modeloAuto }}</p>
+          <p><ion-icon name="calendar-outline" class="icon"></ion-icon><strong>Fecha:</strong> {{ pedido.fechaPedido }}</p>
+          <p><ion-icon name="flag-outline" class="icon"></ion-icon><strong>Estado:</strong> <strong>{{ pedido.estado }}</strong></p>
+        </div>
         <ion-item lines="none" class="price-item">
           <ion-label><strong>Precio:</strong> {{ pedido.price }}</ion-label>
         </ion-item>
@@ -34,4 +30,3 @@
     </ion-card>
   </div>
 </ion-content>
-
