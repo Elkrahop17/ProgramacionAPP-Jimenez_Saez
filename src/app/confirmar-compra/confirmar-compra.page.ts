@@ -8,17 +8,25 @@ import { Router } from '@angular/router';
 })
 export class ConfirmarCompraPage {
   viaje: any;
+  cargando = false;  // Estado para controlar el spinner
 
   constructor(private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation && navigation.extras.state) {
-      this.viaje = navigation.extras.state['viaje']; // Usar corchetes para acceder a la propiedad
+      this.viaje = navigation.extras.state['viaje'];
     }
   }
 
   confirmarCompra() {
-    console.log('Compra confirmada para el viaje:', this.viaje);
-    this.router.navigate(['/metodo-pago']);
+    // Activa el estado de carga
+    this.cargando = true;
+
+    // Simulación de espera de 3 segundos
+    setTimeout(() => {
+      console.log('Compra confirmada para el viaje:', this.viaje);
+      this.cargando = false;
+      this.router.navigate(['/metodo-pago']);
+    }, 3000);
   }
 
   goBack() {

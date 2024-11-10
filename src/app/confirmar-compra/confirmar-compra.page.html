@@ -38,6 +38,9 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-button expand="block" class="confirm-btn" (click)="confirmarCompra()">Confirmar y Comprar</ion-button>
+  <!-- Botón de confirmación y spinner -->
+  <ion-button *ngIf="!cargando" expand="block" class="confirm-btn" (click)="confirmarCompra()">Confirmar y Comprar</ion-button>
+  <ion-spinner *ngIf="cargando" name="crescent" color="success"></ion-spinner>
 </ion-content>
+
 

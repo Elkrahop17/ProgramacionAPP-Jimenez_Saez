@@ -20,6 +20,7 @@ export class MetodoPagoPage {
   correoPaypal: string = '';
   numeroCuenta: string = '';
   nombreBanco: string = '';
+  cargando = false;
 
   constructor(private router: Router) {}
 
@@ -52,10 +53,13 @@ export class MetodoPagoPage {
       }
     }
   
-    alert('Compra realizada con éxito');
-    this.router.navigate(['/seguimiento']);
+    // Si todos los campos están completos, activa el loading y simula el proceso de pago
+    this.cargando = true;
+    setTimeout(() => {
+      console.log('Pago procesado con éxito');
+      this.cargando = false;
+      alert('Compra realizada con éxito');
+      this.router.navigate(['/seguimiento']); // Redirige a la página de seguimiento después del pago
+    }, 3000);
   }
-
-
 }
-
