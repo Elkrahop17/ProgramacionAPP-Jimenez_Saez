@@ -1,0 +1,37 @@
+<header>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;600;700&display=swap" rel="stylesheet">
+</header>
+<ion-content>
+  <div class="header">
+    <ion-button class="back-button" (click)="goBack()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <h1 class="page-title">Ruta en tiempo real</h1>
+  </div>
+
+  <ion-card class="map-card">
+    <ion-card-header>
+      <ion-card-title>Mapa del trayecto</ion-card-title>
+      <ion-card-subtitle>Punto de inicio y destino trazados</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <div id="map" class="map-container"></div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="details-card">
+    <ion-card-header>
+      <ion-card-title>Detalles del Viaje</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Punto de partida:</strong> Times Square, Nueva York</p>
+      <p><strong>Destino:</strong> Brooklyn, Nueva York</p>
+      <p><strong>Distancia:</strong> 8.5 km</p>
+      <p><strong>Tiempo estimado:</strong> 25 minutos</p>
+    </ion-card-content>
+  </ion-card>
+
+  
+</ion-content>

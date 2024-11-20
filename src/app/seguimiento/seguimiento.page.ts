@@ -95,4 +95,8 @@ export class SeguimientoPage implements OnInit, OnDestroy {
       this.progresoSubscription.unsubscribe();
     }
   }
+
+  irAlMapa() {
+    this.router.navigate(['/mapa']);  
+  }
 }
