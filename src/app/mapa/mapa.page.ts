@@ -23,22 +23,22 @@ export class MapaPage implements AfterViewInit {
   ngAfterViewInit(): void {
     this.initializeMap();
 
-    // Establecer los puntos de inicio y final y calcular la ruta
-    this.setPoint(40.7128, -74.0060, true); // Punto de inicio (Times Square, Nueva York)
-    this.setPoint(40.73061, -73.935242, false); // Punto final (Brooklyn, Nueva York)
-    this.calculateRoute([-74.0060, 40.7128], [-73.935242, 40.73061]); // Coordenadas de inicio y final
+    // Puntos de inicio y final en Santiago, Chile
+    this.setPoint(-33.4372, -70.6506, true); // Plaza de Armas
+    this.setPoint(-33.4569, -70.6828, false); // Estación Central
+    this.calculateRoute([-70.6506, -33.4372], [-70.6828, -33.4569]); // Coordenadas de inicio y final
   }
 
   initializeMap() {
     this.map = new mapboxgl.Map({
-      container: 'map', // ID del contenedor HTML
-      style: 'mapbox://styles/mapbox/streets-v11', // Estilo del mapa
-      center: [-74.5, 40], // Coordenadas iniciales
-      zoom: 9, // Nivel de zoom
-      accessToken: environment.mapboxApiKey, // Token de acceso
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [-70.6506, -33.4372], // Centrar en Plaza de Armas
+      zoom: 12, // Ajustar nivel de zoom para Santiago
+      accessToken: environment.mapboxApiKey,
     });
 
-    this.map.addControl(new mapboxgl.NavigationControl()); // Controles de navegación
+    this.map.addControl(new mapboxgl.NavigationControl());
   }
 
   setPoint(lat: number, lng: number, isStart: boolean) {
@@ -82,7 +82,7 @@ export class MapaPage implements AfterViewInit {
       return;
     }
 
-    // Crear la ruta en el mapa, asegurando que la propiedad 'properties' esté presente
+    // Crear la ruta en el mapa
     this.map.addSource('route', {
       type: 'geojson',
       data: {
@@ -91,7 +91,7 @@ export class MapaPage implements AfterViewInit {
           type: 'LineString',
           coordinates: route,
         },
-        properties: {} // Añadir una propiedad vacía
+        properties: {}, // Añadir una propiedad vacía
       },
     });
 
@@ -101,16 +101,16 @@ export class MapaPage implements AfterViewInit {
       type: 'line',
       source: 'route',
       paint: {
-        'line-color': '#ff0000', // Color de la ruta
-        'line-width': 4, // Grosor de la línea
+        'line-color': '#ff0000',
+        'line-width': 4,
       },
     });
 
-    // Centrar el mapa en el punto de inicio (primer punto de la ruta)
+    // Centrar el mapa en el primer punto de la ruta
     const [startLng, startLat] = route[0];
     this.map.flyTo({
-      center: [startLng, startLat], // Centrar en el primer punto
-      zoom: 14, // Ajustar el nivel de zoom (ajustable)
+      center: [startLng, startLat],
+      zoom: 14,
     });
   }
 
@@ -119,55 +119,40 @@ export class MapaPage implements AfterViewInit {
       console.error('La ruta no tiene suficientes puntos para animar.');
       return;
     }
-  
+
     let index = 0;
-    const animationSpeed = 1500; // Milisegundos entre movimientos (ajustable)
-  
-    // Crear el marcador del vehículo si no existe
+    const animationSpeed = 1000; // Milisegundos entre movimientos
+
+    // Crear el marcador del vehículo
     if (!this.vehicleMarker) {
-      const vehicleIcon = 'assets/img/car-mapa.png'; // URL de tu ícono
+      const vehicleIcon = 'assets/img/car-mapa.png'; // Ruta del ícono
       this.vehicleMarker = new mapboxgl.Marker({
         element: this.createVehicleIcon(vehicleIcon),
       })
         .setLngLat(route[0]) // Comienza en el primer punto de la ruta
         .addTo(this.map);
     }
-  
+
     const moveMarker = () => {
       if (index < route.length) {
-        // Actualizar la posición del marcador
         this.vehicleMarker.setLngLat(route[index]);
-  
-        // Centrar el mapa en la nueva posición del vehículo
-        this.map.flyTo({
-          center: route[index], // Centrar en la nueva posición del vehículo
-          zoom: 14, // Puedes ajustar el zoom si lo deseas
-          speed: 0.8, // Ajustar la velocidad del movimiento del mapa
-          curve: 1, // Hacer que el movimiento sea más suave
-        });
-  
-        // Incrementar el índice para avanzar a la siguiente posición de la ruta
+        this.map.flyTo({ center: route[index], zoom: 14 }); // Actualizar vista con el vehículo
         index++;
-  
-        // Llamar a la siguiente animación después de un retraso
         setTimeout(moveMarker, animationSpeed);
       } else {
         console.log('El vehículo llegó al destino.');
       }
     };
-  
-    // Comenzar la animación
+
     moveMarker();
   }
-  
 
-  // Crear el ícono personalizado del vehículo
   createVehicleIcon(iconUrl: string) {
     const img = document.createElement('img');
-    img.src = iconUrl; // Usar la ruta correcta aquí
-    img.style.width = '30px'; // Ajusta el tamaño del ícono según sea necesario
-    img.style.height = '30px';
-    img.style.transform = 'translate(-50%, -50%)'; // Centrar el ícono
+    img.src = iconUrl; // Ruta del ícono
+    img.style.width = '50px'; // Tamaño del ícono
+    img.style.height = '50px';
+    img.style.transform = 'translate(-50%, -50%)'; // Centrar
     return img;
   }
 }
