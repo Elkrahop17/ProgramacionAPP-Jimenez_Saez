@@ -1,0 +1,35 @@
+<header>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</header>
+
+
+<ion-content>
+  <div class="header">
+    <ion-button class="back-button" (click)="goToProfile()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <h1 class="page-title">Sección de Pago</h1>
+  </div>
+  <div class="page-container">
+    <h2 class="page-title">Selecciona un método de pago</h2>
+    <div class="payment-options">
+      <ion-card (click)="selectPaymentMethod('Tarjeta de Crédito')">
+        <ion-icon name="card-outline" class="payment-icon"></ion-icon>
+        <h3>Tarjeta de Crédito</h3>
+      </ion-card>
+
+      <ion-card (click)="selectPaymentMethod('PayPal')">
+        <ion-icon name="logo-paypal" class="payment-icon"></ion-icon>
+        <h3>PayPal</h3>
+      </ion-card>
+
+      <ion-card (click)="selectPaymentMethod('Google Pay')">
+        <ion-icon name="logo-google" class="payment-icon"></ion-icon>
+        <h3>Google Pay</h3>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+

@@ -1,0 +1,62 @@
+<header>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</header>
+
+<ion-content>
+
+  <div class="header">
+    <ion-button class="back-button" (click)="goToProfile()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <h1 class="page-title">Sección de Ayuda</h1>
+  </div>
+
+  <div class="help-container">
+    <h2 class="help-title">¿En qué podemos ayudarte?</h2>
+    <p class="help-description">
+      Explora nuestras preguntas frecuentes o contáctanos si necesitas más asistencia.
+    </p>
+
+    <!-- Acordeón de preguntas frecuentes -->
+    <ion-accordion-group>
+      <ion-accordion>
+        <ion-item slot="header">
+          <ion-icon name="help-circle-outline" slot="start"></ion-icon>
+          <ion-label>¿Cómo puedo registrarme?</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          Para registrarte, ve a la página de inicio de sesión y selecciona "Crear cuenta". Llena el formulario con tus datos personales.
+        </div>
+      </ion-accordion>
+
+      <ion-accordion>
+        <ion-item slot="header">
+          <ion-icon name="car-outline" slot="start"></ion-icon>
+          <ion-label>¿Cómo puedo ofrecer mi vehículo?</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          Ve a la sección "Ofrecer Vehículo" y completa la información sobre tu auto y disponibilidad.
+        </div>
+      </ion-accordion>
+
+      <ion-accordion>
+        <ion-item slot="header">
+          <ion-icon name="cash-outline" slot="start"></ion-icon>
+          <ion-label>¿Cuáles son los métodos de pago?</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          Aceptamos tarjeta de crédito, PayPal y Google Pay. Puedes seleccionar el método que prefieras durante la confirmación del viaje.
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <!-- Botón para contactar soporte -->
+    <ion-button expand="block" color="primary" (click)="contactSupport()">
+      <ion-icon slot="start" name="chatbubbles-outline"></ion-icon>
+      Contactar Soporte
+    </ion-button>
+  </div>
+</ion-content>
+

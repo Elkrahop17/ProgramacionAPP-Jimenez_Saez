@@ -76,9 +76,21 @@ const routes: Routes = [
     loadChildren: () => import('./mapa/mapa.module').then( m => m.MapaPageModule)
   },
   {
+    path: 'pago',
+    loadChildren: () => import('./pago/pago.module').then( m => m.PagoPageModule)
+  },
+  {
+    path: 'ayuda',
+    loadChildren: () => import('./ayuda/ayuda.module').then( m => m.AyudaPageModule)
+  },
+  {
     path: '**', // Ruta comodín para URLs no encontradas
     redirectTo: 'not-found'
   },
+  
+
+  
+
   
 
 

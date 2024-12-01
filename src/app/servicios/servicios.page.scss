@@ -19,6 +19,10 @@
     --box-shadow: none;
     padding: 0;
   }
+
+  .back-button ion-icon, .settings-button ion-icon {
+    color: #000000;
+  }
   
   .page-title {
     font-size: 22px;
@@ -112,5 +116,31 @@
     color: #f44336;
     font-family: 'Urbanist', sans-serif;
     margin-top: 20px;
+  }
+
+  .my-trip {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #4CAF50; /* Puedes cambiar el color según lo que prefieras */
+    background-color: #e8f5e9; /* Un fondo suave para destacar */
+    padding: 8px 12px;
+    border-radius: 8px;
+  }
+  
+  .trip-icon {
+    margin-right: 8px;
+    color: #4CAF50; /* El ícono también resalta con el mismo color */
+  }
+  
+  .taken-message {
+    background-color: #f8d7da; /* Color de fondo rojo claro */
+    color: #721c24; /* Texto rojo oscuro */
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-align: center;
   }
   

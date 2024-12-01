@@ -91,4 +91,16 @@ export class ProfilePage implements OnInit {
   goToConfiguracion() {
     this.router.navigate(['configuracion']);
   }
+
+  goToActividad() {
+    this.router.navigate(['tabs/actividad']); 
+  }
+  
+  goToPago() {
+    this.router.navigate(['pago']);
+  }
+  
+  goToAyuda() {
+    this.router.navigate(['ayuda']);
+  }
 }

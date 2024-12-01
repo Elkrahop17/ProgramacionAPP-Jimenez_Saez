@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ViajesService } from '../servicios/viajes.service'; // Importa el servicio
 
 @Component({
   selector: 'app-metodo-pago',
@@ -9,10 +10,10 @@ import { Router } from '@angular/router';
 export class MetodoPagoPage {
   metodosPago = [
     { nombre: 'Tarjeta de Crédito/Débito', valor: 'tarjeta', icono: 'card-outline' },
-    { nombre: 'PayPal', valor: 'paypal', icono: 'logo-paypal'  },
-    { nombre: 'Transferencia Bancaria', valor: 'transferencia', icono: 'cash-outline'  }
+    { nombre: 'PayPal', valor: 'paypal', icono: 'logo-paypal' },
+    { nombre: 'Transferencia Bancaria', valor: 'transferencia', icono: 'cash-outline' }
   ];
-  
+
   metodoSeleccionado: string = '';
   numeroTarjeta: string = '';
   fechaExpiracion: string = '';
@@ -22,20 +23,18 @@ export class MetodoPagoPage {
   nombreBanco: string = '';
   cargando = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private viajesService: ViajesService) {} // Inyecta el servicio
 
   goBack() {
     this.router.navigate(['/confirmar-compra']);
   }
 
   procesarPago() {
-    // Verifica que se haya seleccionado un método de pago
     if (!this.metodoSeleccionado) {
       alert('Por favor, seleccione un método de pago.');
       return;
     }
-  
-    // Valida el método de pago seleccionado y los campos correspondientes
+
     if (this.metodoSeleccionado === 'tarjeta') {
       if (!this.numeroTarjeta || !this.fechaExpiracion || !this.codigoSeguridad) {
         alert('Por favor, complete todos los campos de la tarjeta.');
@@ -52,14 +51,16 @@ export class MetodoPagoPage {
         return;
       }
     }
-  
-    // Si todos los campos están completos, activa el loading y simula el proceso de pago
+
     this.cargando = true;
     setTimeout(() => {
       console.log('Pago procesado con éxito');
       this.cargando = false;
       alert('Compra realizada con éxito');
-      this.router.navigate(['/seguimiento']); // Redirige a la página de seguimiento después del pago
+
+      // Paso los datos del viaje a la página de seguimiento
+      const viajeActual = this.viajesService.getViajeActual(); // Obtén los datos del viaje actual
+      this.router.navigate(['/seguimiento'], { state: { viaje: viajeActual } });
     }, 3000);
   }
 }
