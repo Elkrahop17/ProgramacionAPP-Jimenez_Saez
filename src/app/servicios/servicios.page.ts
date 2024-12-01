@@ -1,42 +1,64 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ViajesService } from './viajes.service';
 import { PedidosService } from '../servicios/pedidos.service'; // Importa el servicio de pedidos
+import { AuthService } from '../services/auth.service'; // Importa el servicio de autenticación
 
 @Component({
   selector: 'app-servicios',
   templateUrl: './servicios.page.html',
   styleUrls: ['./servicios.page.scss'],
 })
-export class ServiciosPage {
-  pickupLocation: string = '';
-  destination: string = '';
-  viajesDisponibles: any[] = [];
-  searchAttempted: boolean = false;
+export class ServiciosPage implements OnInit {
+  pickupLocation: string = ''; // Lugar de partida
+  destination: string = ''; // Destino
+  viajesDisponibles: any[] = []; // Lista de viajes disponibles
+  searchAttempted: boolean = false; // Indicador para mostrar resultados
+  userEmail: string | null = null; // Correo del usuario logueado
 
   constructor(
     private router: Router,
     private viajesService: ViajesService,
-    private pedidosService: PedidosService // Inyecta el servicio de pedidos
+    private pedidosService: PedidosService, // Inyecta el servicio de pedidos
+    private authService: AuthService // Inyecta el servicio de autenticación
   ) {}
+
+  async ngOnInit() {
+    // Carga inicial: obtener el correo del usuario logueado
+    this.userEmail = await this.authService.getUserEmail();
+
+    // Obtén todos los viajes al iniciar la página
+    this.viajesDisponibles = await this.viajesService.obtenerViajes();
+  }
 
   buscarViajes() {
     this.searchAttempted = true;
 
-    // Obtiene los viajes desde el servicio
-    this.viajesDisponibles = this.viajesService.obtenerViajes();
-
     // Filtra los resultados en función de los criterios de búsqueda
-    this.viajesDisponibles = this.viajesDisponibles.filter(
+    this.viajesDisponibles = this.viajesService.obtenerViajes().filter(
       (viaje) =>
         viaje.pickupLocation.toLowerCase().includes(this.pickupLocation.toLowerCase()) &&
-        viaje.destination.toLowerCase().includes(this.destination.toLowerCase())
+        viaje.destination.toLowerCase().includes(this.destination.toLowerCase()) &&
+        !viaje.isTaken // Solo mostramos viajes que no han sido tomados
     );
   }
 
   confirmarCompra(viaje: any) {
-    // Guarda el viaje actual en el servicio de Viajes
-    this.viajesService.setViajeActual(viaje);
+    // Si el viaje ya ha sido tomado, mostramos un mensaje en la card y no permitimos la compra
+    if (viaje.isTaken) {
+      alert('Este viaje ya ha sido tomado.');
+      return;
+    }
+
+    // Verificar si el viaje fue creado por el usuario logueado
+    if (viaje.userEmail === this.userEmail) {
+      alert('No puedes tomar un viaje que tú mismo creaste.');
+      return;
+    }
+
+    // Marca el viaje como tomado y actualiza la disponibilidad de asientos
+    viaje.isTaken = true;
+    this.viajesService.actualizarViaje(viaje);
 
     // Guarda el pedido completado en el servicio de Pedidos
     this.pedidosService.agregarPedido({

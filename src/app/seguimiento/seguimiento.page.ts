@@ -10,7 +10,7 @@ import { interval } from 'rxjs';
   styleUrls: ['./seguimiento.page.scss'],
 })
 export class SeguimientoPage implements OnInit, OnDestroy {
-  viaje: any;
+  viaje: any; // Variable para almacenar el viaje
   pasos: string[] = [
     'Recibido',
     'En camino a recogerte',
@@ -36,11 +36,21 @@ export class SeguimientoPage implements OnInit, OnDestroy {
     });
     await loading.present();
 
-    // Cargar datos del viaje
-    this.viaje = await this.viajesService.getViajeActual();
+    // Obtener los datos del viaje desde el estado de la navegación
+    this.viaje = this.router.getCurrentNavigation()?.extras?.state?.['viaje'] || this.viajesService.getViajeActual();
+
+    
+
+
+    // Verificar si los datos del viaje son nulos o vacíos
+    if (!this.viaje) {
+      console.error('No se encontraron datos del viaje.');
+      // Puedes mostrar una alerta o redirigir al usuario a otra página
+    }
+
     loading.dismiss();
 
-    // Inicia la simulación de progreso
+    // Iniciar simulación de progreso
     this.simularProgreso();
   }
 

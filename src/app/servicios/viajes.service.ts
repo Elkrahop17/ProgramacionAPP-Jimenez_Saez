@@ -9,6 +9,8 @@ export class ViajesService {
 
   // Método para agregar un nuevo viaje creado por el usuario
   agregarViaje(viaje: any) {
+    // Aseguramos que cada viaje tenga un ID único
+    viaje.id = Date.now(); // Usamos un ID único basado en la fecha
     this.viajes.push(viaje);
   }
 
@@ -25,6 +27,16 @@ export class ViajesService {
   // Método para obtener el viaje actual
   getViajeActual() {
     return this.viajeActual;
+  }
+
+  // Método para actualizar un viaje, por ejemplo, cuando se marca como ocupado
+  actualizarViaje(viajeActualizado: any) {
+    const index = this.viajes.findIndex(viaje => viaje.id === viajeActualizado.id);
+
+    if (index !== -1) {
+      // Actualiza el viaje en la lista
+      this.viajes[index] = viajeActualizado;
+    }
   }
 
   // Método privado para generar viajes aleatorios
@@ -51,18 +63,17 @@ export class ViajesService {
       const costPerPassenger = (Math.floor(Math.random() * 5) + 2) * 1000; // Entre 2000 y 7000
 
       viajesAleatorios.push({
+        id: Date.now() + Math.random(), // Generamos un ID único
         driverName,
         vehicleDetails,
         pickupLocation,
         destination,
         availableSeats,
         costPerPassenger,
+        isTaken: false, // Campo para verificar si el viaje está tomado
       });
     }
 
     return viajesAleatorios;
   }
 }
-
-
-

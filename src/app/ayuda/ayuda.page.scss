@@ -1,0 +1,74 @@
+*{
+    font-family: "Urbanist", sans-serif;
+}
+
+.header {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    padding: 20px;
+    position: relative;
+
+}
+
+.back-button {
+    position: absolute;
+    top: -4px;
+    left: 16px;
+    --background: transparent; 
+    --border: none;
+    --box-shadow: none; 
+    padding: 0; 
+}
+
+.back-button ion-icon, .settings-button ion-icon {
+    color: #000000;
+}
+
+.page-title {
+    font-family: "Urbanist", sans-serif;
+    font-size: 22px;
+    color: #000000; 
+    margin: 0;
+    text-align: center;
+}
+
+.help-container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .help-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .help-description {
+    font-size: 1rem;
+    color: var(--ion-color-medium);
+    margin-bottom: 20px;
+  }
+  
+  ion-accordion {
+    margin-bottom: 10px;
+    border: 1px solid var(--ion-color-light);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  ion-accordion ion-item {
+    --background: var(--ion-color-light);
+  }
+  
+  ion-accordion div {
+    font-size: 0.9rem;
+    text-align: left;
+    color: var(--ion-color-dark);
+  }
+  
+  ion-button {
+    margin-top: 20px;
+    font-size: 1rem;
+  }
+  

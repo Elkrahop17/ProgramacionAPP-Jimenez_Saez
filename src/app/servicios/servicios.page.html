@@ -7,19 +7,23 @@
   </div>
 
   <div class="search-container">
+    <!-- Lugar de Salida -->
     <ion-item class="search-input">
       <ion-label position="floating">Lugar de salida</ion-label>
       <ion-input [(ngModel)]="pickupLocation"></ion-input>
     </ion-item>
 
+    <!-- Destino -->
     <ion-item class="search-input">
       <ion-label position="floating">Destino</ion-label>
       <ion-input [(ngModel)]="destination"></ion-input>
     </ion-item>
 
+    <!-- Botón Buscar Transporte -->
     <ion-button expand="block" class="search-btn" (click)="buscarViajes()">Buscar Transporte</ion-button>
   </div>
 
+  <!-- Resultados cuando hay viajes disponibles -->
   <div *ngIf="viajesDisponibles.length > 0" class="results-container">
     <ion-card *ngFor="let viaje of viajesDisponibles" class="viaje-card">
       <ion-card-header>
@@ -50,12 +54,34 @@
           <p>Costo por pasajero: {{ viaje.costPerPassenger }}</p>
         </div>
 
-        <ion-button expand="full" (click)="confirmarCompra(viaje)">Agregar</ion-button>
+        <!-- Mensaje destacado si el viaje ya ha sido tomado -->
+        <div *ngIf="viaje.isTaken" class="taken-message">
+          <ion-text color="danger">Viaje ya tomado</ion-text>
+        </div>
+
+        <!-- Mensaje si es el viaje del usuario -->
+        <ion-label *ngIf="viaje.userEmail === userEmail" color="primary" class="my-trip">
+          <ion-icon name="checkmark-circle-outline" class="trip-icon"></ion-icon>
+          Este es tu viaje
+        </ion-label>
+
+        <!-- Botón para confirmar compra solo si el viaje no ha sido tomado y no es del usuario -->
+        <ion-button expand="full" (click)="confirmarCompra(viaje)" *ngIf="!viaje.isTaken && viaje.userEmail !== userEmail">
+          Agregar
+        </ion-button>
       </ion-card-content>
     </ion-card>
   </div>
 
+  <!-- Mensaje cuando no hay resultados -->
   <div *ngIf="viajesDisponibles.length === 0 && searchAttempted" class="no-results">
     <p>No se encontraron transportes disponibles</p>
+  </div>
+
+  <!-- Mensaje cuando no hay viajes disponibles con los criterios -->
+  <div *ngIf="searchAttempted && viajesDisponibles.length === 0">
+    <ion-text color="danger">
+      <p>No se encontraron viajes disponibles con los criterios seleccionados.</p>
+    </ion-text>
   </div>
 </ion-content>
