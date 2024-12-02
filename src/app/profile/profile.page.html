@@ -28,11 +28,61 @@
             <ion-icon name="camera-outline" class="upload-icon"></ion-icon>
           </ng-template>
         </div>        
+        <!-- Sección de perfil -->
         <div class="profile-info">
-          <h2>{{nombre_usuario}}</h2>
+          <h2>
+            {{nombre_usuario}}
+            <ion-icon 
+              name="create-outline" 
+              class="edit-icon" 
+              (click)="openEditPersonalModal()">
+            </ion-icon>
+          </h2>
           <p><ion-icon name="location-outline"></ion-icon> {{lugar_origen}}</p>
         </div>
       </div>
+
+      <ion-modal [isOpen]="isEditPersonalModalOpen" (didDismiss)="closeEditPersonalModal()">
+        <ng-template>
+          <div class="modal-container">
+            <h2 class="modal-title">Editar Perfil</h2>
+            <p class="modal-subtitle">Actualiza tu información personal fácilmente</p>
+            <!-- Campo para el nombre de usuario -->
+            <ion-item class="custom-item">
+              <ion-icon name="person-outline" slot="start"></ion-icon>
+              <ion-input 
+                placeholder="Nuevo nombre de usuario" 
+                [(ngModel)]="nombre_usuario">
+              </ion-input>
+            </ion-item>
+            <!-- Campo para el correo -->
+            <ion-item class="custom-item">
+              <ion-icon name="mail-outline" slot="start"></ion-icon>
+              <ion-input 
+                placeholder="Nuevo correo electrónico" 
+                [(ngModel)]="correo" 
+                type="email">
+              </ion-input>
+            </ion-item>
+            <!-- Campo para la contraseña -->
+            <ion-item class="custom-item">
+              <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+              <ion-input 
+                placeholder="Nueva contraseña" 
+                [(ngModel)]="password" 
+                type="password">
+              </ion-input>
+            </ion-item>
+            <!-- Botones -->
+            <div class="modal-buttons">
+              <ion-button expand="block" shape="round" color="primary" (click)="savePersonalInformation()">Guardar Cambios</ion-button>
+              <ion-button expand="block" shape="round" color="medium" (click)="closeEditPersonalModal()">Cancelar</ion-button>
+            </div>
+          </div>
+        </ng-template>
+      </ion-modal>
+      
+      
       <!-- Datos de seguidores -->
       <div class="profile-stats">
         <div class="stat">
@@ -75,25 +125,33 @@
   <!-- Modal -->
   <ion-modal [isOpen]="isModalOpen" (didDismiss)="dismissModal()">
     <ng-template>
-      <div class="modal-content">
-        <h3>Editar Información</h3>
-        <ion-item>
+      <div class="modal-container">
+        <h2 class="modal-title">Editar Información</h2>
+        <p class="modal-subtitle">Completa o actualiza los datos necesarios</p>
+        <!-- Campo para ocupación -->
+        <ion-item class="custom-item">
           <ion-icon name="briefcase-outline" slot="start"></ion-icon>
           <ion-input placeholder="Ingresa tu ocupación" [(ngModel)]="ocupacion"></ion-input>
         </ion-item>
-        <ion-item>
+        <!-- Campo para años de experiencia -->
+        <ion-item class="custom-item">
           <ion-icon name="time-outline" slot="start"></ion-icon>
-          <ion-input placeholder="Años de experiencia" [(ngModel)]="experiencia"></ion-input>
+          <ion-input placeholder="Años de experiencia" [(ngModel)]="experiencia" type="number"></ion-input>
         </ion-item>
-        <ion-item>
+        <!-- Campo para correo -->
+        <ion-item class="custom-item">
           <ion-icon name="mail-outline" slot="start"></ion-icon>
-          <ion-input placeholder="Ingresa tu correo" [(ngModel)]="correo"></ion-input>
+          <ion-input placeholder="Ingresa tu correo" [(ngModel)]="correo" type="email"></ion-input>
         </ion-item>
-        <ion-button expand="full" (click)="saveInformation()">Guardar Información</ion-button>
-        <ion-button expand="full" (click)="dismissModal()">Cancelar</ion-button>
+        <!-- Botones -->
+        <div class="modal-buttons">
+          <ion-button expand="block" shape="round" color="primary" (click)="saveInformation()">Guardar Información</ion-button>
+          <ion-button expand="block" shape="round" color="medium" (click)="dismissModal()">Cancelar</ion-button>
+        </div>
       </div>
     </ng-template>
   </ion-modal>
+  
     
 
 </ion-content>

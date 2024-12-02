@@ -1,3 +1,7 @@
+*{
+    font-family: "Urbanist", sans-serif; 
+}
+
 .header {
     display: flex;
     align-items: center; 
@@ -252,3 +256,79 @@ input[type="file"] {
     font-family: 'Urbanist', sans-serif;
     font-size: 16px;
 }
+
+
+/*2do modal estilos*/
+  .profile-info {
+    display: flex;
+    align-items: center; /* Asegura que los elementos estén alineados verticalmente */
+    gap: 8px; /* Espacio entre el nombre y el ícono */
+  }
+  
+  .user-name {
+    font-size: 1.5rem; /* Ajusta el tamaño de la fuente del nombre */
+    font-weight: bold;
+    margin: 0;
+    color: #333;
+  }
+  
+  .edit-icon {
+    font-size: 1.2rem; /* Ajusta el tamaño del ícono */
+    color: #007bff; /* Color del ícono */
+    cursor: pointer; /* Indica que es clickeable */
+    transition: transform 0.2s, color 0.2s; /* Agrega una transición suave */
+  }
+  
+  .edit-icon:hover {
+    transform: scale(1.1); /* Efecto de agrandamiento al pasar el ratón */
+    color: #0056b3; /* Cambia el color al pasar el ratón */
+  }
+  
+  .modal-content {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .modal-container {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  .modal-subtitle {
+    font-size: 1rem;
+    text-align: center;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .custom-item {
+    --padding-start: 16px;
+    --inner-padding-end: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 12px;
+  }
+  
+  .modal-buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  ion-button {
+    font-size: 1rem;
+    --border-radius: 8px;
+  }
+  
+  
