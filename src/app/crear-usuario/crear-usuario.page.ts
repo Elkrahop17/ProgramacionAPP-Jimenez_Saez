@@ -27,13 +27,20 @@ export class CrearUsuarioPage {
 
   async registrar(event: Event) {
     if (this.firstName && this.lastName && this.email && this.password) {
+      // Validar que el correo tenga la extensión @duocuc.cl
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@duocuc\.cl$/;
+      if (!emailPattern.test(this.email)) {
+        await this.showAlert('Error', 'Por favor, ingresa un correo válido con la extensión @duocuc.cl.');
+        return;
+      }
+  
       const user = {
         firstName: this.firstName,
         lastName: this.lastName,
         correo: this.email,
         password: this.password,
       };
-
+  
       // Verificar si el correo ya existe
       const existingUser = await this.authService.getUserByEmail(this.email);
       if (existingUser) {
@@ -53,7 +60,7 @@ export class CrearUsuarioPage {
       console.log('Por favor, completa todos los campos.');
     }
   }
-
+  
   // Método para mostrar alertas
   async showAlert(header: string, message: string) {
     const alert = await this.alertController.create({

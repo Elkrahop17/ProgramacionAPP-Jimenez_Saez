@@ -39,19 +39,26 @@ export class HomePage {
 
   async loginUsuario(event: Event) {
     event.preventDefault();
-
+  
+    // Validar que el correo tenga la extensión @duocuc.cl
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@duocuc\.cl$/;
+    if (!emailPattern.test(this.username)) {
+      await this.showAlert('Error', 'Por favor, ingresa un correo válido con la extensión @duocuc.cl.', 1500);
+      return;
+    }
+  
     // Muestra el spinner de carga mientras se procesa el inicio de sesión
     const loading = await this.loadingController.create({
       message: 'Iniciando sesión...',
       spinner: 'crescent', // Estilo del spinner
     });
     await loading.present();
-
+  
     const storedUsers: User[] = await this.authService.getUsers();
     const loggedUser = storedUsers.find((user: User) => user.correo === this.username && user.password === this.password);
-
+  
     await loading.dismiss(); // Oculta el spinner una vez completada la autenticación
-
+  
     if (loggedUser) {
       await this.authService.setUserEmail(loggedUser.correo);
       await this.showAlert('Éxito', 'Inicio de sesión exitoso.', 1500);
@@ -60,6 +67,7 @@ export class HomePage {
       await this.showAlert('Error', 'Credenciales incorrectas. Por favor, inténtalo de nuevo.', 1500);
     }
   }
+  
 
   async resetPassword() {
     this.router.navigate(['/restablecer']);
