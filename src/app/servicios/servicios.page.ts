@@ -67,7 +67,7 @@ export class ServiciosPage implements OnInit {
       modeloAuto: viaje.vehicleDetails || 'Modelo desconocido',
       fechaPedido: new Date().toLocaleDateString(),
       estado: 'Completado',
-      price: viaje.costPerPassenger * viaje.availableSeats || 'Precio desconocido',
+      price: viaje.costPerPassenger * (viaje.availableSeats || 1),
       rating: [1, 1, 1, 1, 1], // Ejemplo de calificación
     });
 

@@ -1,42 +1,31 @@
-<header>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-</header>
-
 <ion-content [fullscreen]="true" class="ion-padding">
-
   <div class="header">
     <ion-button class="close-page" (click)="closePage()">
       <ion-icon name="close-outline"></ion-icon>
     </ion-button>
-    <h1 class="page-title">Ofrecer vehiculo</h1>
+    <h1 class="page-title">Ofrecer vehículo</h1>
   </div>
-
 
   <div class="offer-container">
     <ion-item>
       <ion-label position="floating">Nombre del Conductor</ion-label>
-      <ion-input [(ngModel)]="driverName"></ion-input>
+      <ion-input [(ngModel)]="driverName" readonly></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Marca del Vehículo</ion-label>
       <ion-input [(ngModel)]="vehicleBrand"></ion-input>
     </ion-item>
-
     <ion-item>
       <ion-label position="floating">Modelo</ion-label>
       <ion-input [(ngModel)]="vehicleModel"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Color</ion-label>
-      <ion-input [(ngModel)]="vehicleColor"></ion-input>
-    </ion-item>
-
-    <ion-item>
       <ion-label position="floating">Lugar de Salida</ion-label>
       <ion-input [(ngModel)]="pickupLocation"></ion-input>
+      <ion-button class="location-btn" fill="clear" (click)="usarUbicacionActual()">
+        <ion-icon name="location-outline"></ion-icon>
+      </ion-button>
     </ion-item>
 
     <ion-item>
@@ -46,7 +35,7 @@
 
     <ion-item>
       <ion-label position="floating">Asientos Disponibles</ion-label>
-      <ion-input [(ngModel)]="availableSeats" type="number"></ion-input>
+      <ion-input [(ngModel)]="availableSeats" type="number" placeholder="Máx: {{ MAX_SEATS }}"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -54,7 +43,8 @@
       <ion-input [(ngModel)]="costPerPassenger" type="number"></ion-input>
     </ion-item>
 
-    <ion-button expand="block" class="offer-btn" (click)="publicarViaje()">Publicar Viaje</ion-button>
+    <ion-button expand="block" class="offer-btn" (click)="publicarViaje()" [disabled]="isVehicleOffered">
+      {{ isVehicleOffered ? 'Ya has publicado un vehículo' : 'Publicar Viaje' }}
+    </ion-button>
   </div>
 </ion-content>
-
