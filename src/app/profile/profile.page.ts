@@ -12,6 +12,7 @@ import { ModalController } from '@ionic/angular';
 export class ProfilePage implements OnInit {
   isModalOpen = false;
   nombre_usuario: string | undefined; // Cambiar a undefined para manejar el valor inicial
+  password: string = '';
   lugar_origen: string; 
   profileImage: string | ArrayBuffer | null = null;
   ocupacion: string;
@@ -81,6 +82,41 @@ export class ProfilePage implements OnInit {
   async saveInformation() {
     // Lógica para guardar la información
     this.dismissModal(); // Cerrar el modal después de guardar
+  }
+
+  // Variables para manejar los modales
+  isEditPersonalModalOpen = false; // Para el modal de edición de datos personales
+  isOtherModalOpen = false; // Mantén esta si ya tienes otro modal para ocupación y experiencia
+
+  // Métodos para el modal de edición de información personal
+  openEditPersonalModal() {
+    this.isEditPersonalModalOpen = true;
+  }
+
+  closeEditPersonalModal() {
+    this.isEditPersonalModalOpen = false;
+  }
+
+  async savePersonalInformation() {
+    if (!this.nombre_usuario || !this.correo || !this.password) {
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'Por favor completa todos los campos.',
+        buttons: ['OK'],
+      });
+      await alert.present();
+      return;
+    }
+
+    // Guardar la información actualizada (implementa tu lógica aquí)
+    console.log('Datos personales actualizados:', {
+      nombre_usuario: this.nombre_usuario,
+      correo: this.correo,
+      password: this.password,
+    });
+
+    // Cierra el modal después de guardar
+    this.closeEditPersonalModal();
   }
   
 
