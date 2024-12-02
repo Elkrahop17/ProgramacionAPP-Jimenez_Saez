@@ -7,6 +7,11 @@ export class ViajesService {
   private viajes: any[] = []; // Lista de viajes creados por los usuarios
   private viajeActual: any; // Almacena el viaje actual seleccionado
 
+  constructor() {
+    // Inicialización de ejemplo: Puedes cambiar esto si necesitas cargar los datos de un backend o almacenamiento persistente.
+    this.viajes = [];
+  }
+
   // Método para agregar un nuevo viaje creado por el usuario
   agregarViaje(viaje: any) {
     // Aseguramos que cada viaje tenga un ID único
@@ -37,6 +42,13 @@ export class ViajesService {
       // Actualiza el viaje en la lista
       this.viajes[index] = viajeActualizado;
     }
+  }
+
+  // Método para verificar si un usuario ha ofrecido un vehículo
+  hasOfferedVehicle(userEmail: string): boolean {
+    // Verificamos si ya existe un viaje asociado al correo del usuario
+    const viajeExistente = this.viajes.find(viaje => viaje.userEmail === userEmail);
+    return viajeExistente !== undefined;
   }
 
   // Método privado para generar viajes aleatorios
@@ -75,5 +87,10 @@ export class ViajesService {
     }
 
     return viajesAleatorios;
+  }
+
+  // Método para obtener los viajes del usuario
+  obtenerViajesPorUsuario(email: string) {
+    return this.viajes.filter(viaje => viaje.userEmail === email);
   }
 }

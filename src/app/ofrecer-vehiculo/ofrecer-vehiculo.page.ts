@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ViajesService } from '../servicios/viajes.service';
-import { AuthService } from '../services/auth.service'; // Servicio para obtener el correo del usuario logueado
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-ofrecer-vehiculo',
@@ -9,74 +9,83 @@ import { AuthService } from '../services/auth.service'; // Servicio para obtener
   styleUrls: ['./ofrecer-vehiculo.page.scss'],
 })
 export class OfrecerVehiculoPage {
-  driverName: string = ''; // Nombre del conductor
-  vehicleBrand: string = ''; // Marca del vehículo
-  vehicleModel: string = ''; // Modelo del vehículo
-  vehicleColor: string = ''; // Color del vehículo
-  pickupLocation: string = ''; // Lugar de partida
-  destination: string = ''; // Destino
-  availableSeats: number | null = null; // Asientos disponibles
-  costPerPassenger: number | null = null; // Costo por pasajero
-  userEmail: string | null = null; // Correo del usuario logueado
+  driverName: string = '';
+  vehicleBrand: string = '';
+  vehicleModel: string = '';
+  pickupLocation: string = '';
+  destination: string = '';
+  availableSeats: number | null = null;
+  userEmail: string | null = null;
+  costPerPassenger: number = 0;
+  isVehicleOffered: boolean = false; // Nueva bandera para controlar si ya se publicó un vehículo
 
-  readonly MAX_SEATS = 4; // Capacidad máxima permitida para los vehículos
+  readonly MAX_SEATS = 4;
+  vehicleBrands = ['Toyota', 'Nissan', 'Ford', 'Chevrolet'];
+  vehicleModels = ['Sedan', 'SUV', 'Camioneta'];
 
   constructor(
     private router: Router,
     private viajesService: ViajesService,
-    private authService: AuthService // Inyección del servicio de autenticación
+    private authService: AuthService
   ) {}
 
   async ngOnInit() {
-    // Obtiene el correo del usuario logueado
+    try {
+      const firstName = await this.authService.getCurrentUserFirstName();
+      if (firstName) {
+        this.driverName = firstName;
+      } else {
+        console.warn('No se encontró un usuario logueado.');
+      }
+    } catch (error) {
+      console.error('Error al obtener el nombre del conductor:', error);
+    }
+
+    // Verificar si el usuario ya ha ofrecido un vehículo
     this.userEmail = await this.authService.getUserEmail();
+    this.isVehicleOffered = await this.viajesService.hasOfferedVehicle(this.userEmail!);
   }
 
   closePage() {
     this.router.navigate(['tabs/inicio']);
   }
 
-  publicarViaje() {
-    // Verificar si todos los campos son válidos
-    if (
-      this.driverName &&
-      this.vehicleBrand &&
-      this.vehicleModel &&
-      this.pickupLocation &&
-      this.destination &&
-      this.availableSeats &&
-      this.costPerPassenger
-    ) {
-      // Validar la capacidad máxima permitida
+  async publicarViaje() {
+    if (this.isVehicleOffered) {
+      alert('Ya has publicado un vehículo.');
+      return;
+    }
+
+    if (this.driverName && this.vehicleBrand && this.vehicleModel && this.pickupLocation && this.destination && this.availableSeats && this.costPerPassenger) {
       if (this.availableSeats > this.MAX_SEATS) {
-        alert(
-          `No puedes ofrecer más de ${this.MAX_SEATS} asientos. Por favor, corrige el número de asientos disponibles.`
-        );
-        return; // Detiene la ejecución si el número de asientos excede el máximo
+        alert(`Máximo ${this.MAX_SEATS} asientos permitidos.`);
+        return;
       }
 
-      // Crear el nuevo viaje
       const nuevoViaje = {
         driverName: this.driverName,
-        vehicleDetails: `${this.vehicleBrand} ${this.vehicleModel} ${this.vehicleColor}`,
+        vehicleDetails: `${this.vehicleBrand} ${this.vehicleModel}`,
         pickupLocation: this.pickupLocation,
         destination: this.destination,
         availableSeats: this.availableSeats,
-        costPerPassenger: this.costPerPassenger,
-        userEmail: this.userEmail, // Asocia el correo del usuario logueado
+        userEmail: this.userEmail,
+        costPerPassenger: this.costPerPassenger
       };
 
-      // Guarda el viaje en el servicio
-      this.viajesService.agregarViaje(nuevoViaje);
-
-      // Almacena el viaje actual en el servicio para que esté disponible en la página de seguimiento
+      await this.viajesService.agregarViaje(nuevoViaje);
       this.viajesService.setViajeActual(nuevoViaje);
 
-      // Navega a la página de seguimiento
+      // Marcar que ya se ofreció un vehículo
+      this.isVehicleOffered = true;
+
       this.router.navigate(['tabs/servicio']);
     } else {
-      console.log('Por favor, completa todos los campos.');
       alert('Por favor, completa todos los campos.');
     }
+  }
+
+  usarUbicacionActual() {
+    this.pickupLocation = 'Duoc San Joaquin';
+    console.log('Ubicación actual establecida:', this.pickupLocation);
   }
 }
