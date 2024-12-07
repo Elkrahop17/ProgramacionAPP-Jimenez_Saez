@@ -1,6 +1,7 @@
 import { Component,  OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { VehiculoService } from '../servicios/vehiculo.service';
 
 @Component({
   selector: 'app-configuracion',
@@ -15,13 +16,20 @@ export class ConfiguracionPage implements OnInit{
   isSecurityModalOpen = false;
   isContactsModalOpen = false;
   contacts: any[] = []
+
+  isVehiclesModalOpen = false;
+  registeredVehicles: any[] = [];
+  newVehicle: any = { brand: '', model: '', plate: '' };  // Datos para el nuevo vehículo
+  vehicleAdded: boolean = false; // Variable para mostrar el mensaje de éxito
+
   
-  constructor(private router: Router,  private authService: AuthService) { 
+  constructor(private router: Router,  private authService: AuthService, private vehiculosService: VehiculoService) { 
   }
 
   ngOnInit() {
     this.loadUserEmail(); // Cargar el correo del usuario al iniciar la página
     this.loadProfileImage();
+    this.loadRegisteredVehicles();
   }
 
   async loadUserEmail() {
@@ -95,6 +103,35 @@ export class ConfiguracionPage implements OnInit{
       this.contacts.push({ name, phone, email });
     }
   }
+
+
+
+  // Función para cargar vehículos registrados
+  loadRegisteredVehicles() {
+    this.registeredVehicles = this.vehiculosService.obtenerVehiculos();
+  }
+
+  // Función para abrir el modal
+  openVehiclesModal() {
+    this.isVehiclesModalOpen = true;
+    this.newVehicle = { brand: '', model: '', plate: '' };  // Resetear los campos
+    this.vehicleAdded = false; // Resetear mensaje de éxito
+  }
+
+  // Función para cerrar el modal
+  closeVehiclesModal() {
+    this.isVehiclesModalOpen = false;
+  }
+
+  // Función para agregar un nuevo vehículo
+  addNewVehicle() {
+    if (this.newVehicle.brand && this.newVehicle.model && this.newVehicle.plate) {
+      this.vehiculosService.agregarVehiculo(this.newVehicle);
+      this.vehicleAdded = true;  // Mostrar mensaje de éxito
+      setTimeout(() => this.closeVehiclesModal(), 2000);  // Cerrar el modal después de 2 segundos
+    }
+  }
+
 
   logout() {
     

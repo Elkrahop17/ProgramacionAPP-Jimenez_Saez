@@ -66,9 +66,13 @@
         </ion-label>
 
         <!-- Botón para confirmar compra solo si el viaje no ha sido tomado y no es del usuario -->
-        <ion-button expand="full" (click)="confirmarCompra(viaje)" *ngIf="!viaje.isTaken && viaje.userEmail !== userEmail">
+        <ion-button expand="full" (click)="confirmarCompra(viaje)" 
+          *ngIf="!viaje.isTaken && viaje.userEmail !== userEmail" 
+          [disabled]="isVehicleOffered || viaje.isTaken || viaje.userEmail === userEmail || viajeEnCurso">
           Agregar
         </ion-button>
+
+
       </ion-card-content>
     </ion-card>
   </div>

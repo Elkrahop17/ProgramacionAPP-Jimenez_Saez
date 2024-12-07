@@ -6,18 +6,19 @@
     position: relative;
 }
 
-.close-page {
-    position: absolute;
-    top: 8px;
-    left: 16px;
-    --background: transparent; 
-    --border: none;
-    --box-shadow: none; 
-    padding: 0; 
+.back-button {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  --background: transparent; 
+  --border: none;
+  --box-shadow: none; 
+  padding: 0; 
 }
 
-.close-page ion-icon{
-    color: #000000;
+
+.back-button ion-icon {
+  color: #000000;
 }
 
 .page-title {
@@ -69,3 +70,23 @@
       margin-top: 20px;
     }
   }
+
+  .form-container {
+    padding: 16px;
+  }
+  
+  ion-card {
+    margin-bottom: 16px;
+  }
+  
+  .submit-button-container {
+    margin-top: 20px;
+  }
+
+  .vehicle-published-message {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  

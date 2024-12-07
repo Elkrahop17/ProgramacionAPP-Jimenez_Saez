@@ -34,6 +34,14 @@ export class ViajesService {
     return this.viajeActual;
   }
 
+  // Método para verificar si el usuario tiene un viaje en curso
+  async tieneViajeEnCurso(email: string): Promise<boolean> {
+    const viajes = await this.obtenerViajes();
+    return viajes.some((viaje) => viaje.userEmail === email && viaje.isTaken);
+  }
+  
+
+
   // Método para actualizar un viaje, por ejemplo, cuando se marca como ocupado
   actualizarViaje(viajeActualizado: any) {
     const index = this.viajes.findIndex(viaje => viaje.id === viajeActualizado.id);
@@ -93,4 +101,5 @@ export class ViajesService {
   obtenerViajesPorUsuario(email: string) {
     return this.viajes.filter(viaje => viaje.userEmail === email);
   }
+
 }
