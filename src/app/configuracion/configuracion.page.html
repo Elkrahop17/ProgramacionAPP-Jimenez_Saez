@@ -29,39 +29,48 @@
       </div>
     </div>
 
-    <!-- Sección para Cambiar Datos Personales -->
-
+    <!-- Sección de Mis Vehículos -->
     <div class="settings-section">
       <div class="section-header">
-        <h2 class="section-title">Cambiar Datos Personales</h2>
-        <ion-icon name="create-outline" class="edit-icon" (click)="openModal()"></ion-icon>
+        <h2 class="section-title">Mis Vehículos</h2>
+        <ion-icon name="car-outline" class="edit-icon" (click)="openVehiclesModal()"></ion-icon>
       </div>
     </div>
-  
-    <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
+
+    <!-- Modal de Mis Vehículos -->
+    <ion-modal [isOpen]="isVehiclesModalOpen" (didDismiss)="closeVehiclesModal()">
       <ng-template>
         <div class="modal-content">
-          <h3 class="modal-title">Editar Información Personal</h3>
+
+          <h3 class="modal-title">Registrar Vehículo</h3>          
+          <!-- Formulario de registro de vehículo -->
           <ion-item>
-            <ion-label position="stacked">Nombre de Usuario</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-label position="floating">Marca</ion-label>
+            <ion-input [(ngModel)]="newVehicle.brand" name="brand" required></ion-input>
           </ion-item>
+
           <ion-item>
-            <ion-label position="stacked">Email</ion-label>
-            <ion-input type="email"></ion-input>
+            <ion-label position="floating">Modelo</ion-label>
+            <ion-input [(ngModel)]="newVehicle.model" name="model" required></ion-input>
           </ion-item>
+
           <ion-item>
-            <ion-label position="stacked">Contraseña</ion-label>
-            <ion-input type="password"></ion-input>
+            <ion-label position="floating">Placa</ion-label>
+            <ion-input [(ngModel)]="newVehicle.plate" name="plate" required></ion-input>
           </ion-item>
-          <ion-item>
-            <ion-label position="stacked">Fecha de Nacimiento</ion-label>
-            <ion-datetime display-format="DD/MM/YYYY"></ion-datetime>
-          </ion-item>
-          <ion-button expand="block" (click)="saveChanges()">Guardar Cambios</ion-button>
+
+          <ion-button expand="full" (click)="addNewVehicle()" [disabled]="!newVehicle.brand || !newVehicle.model || !newVehicle.plate">
+            Registrar Vehículo
+          </ion-button>
+
+          <!-- Mensaje de éxito al agregar vehículo -->
+          <ion-text color="primary" *ngIf="vehicleAdded" class="vehicle-added-message">
+            <p>¡Vehículo registrado exitosamente!</p>
+          </ion-text>
         </div>
       </ng-template>
     </ion-modal>
+
 
 
     <!-- Sección para Configuración de Apariencia -->

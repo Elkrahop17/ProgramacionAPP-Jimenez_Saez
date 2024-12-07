@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ViajesService } from './viajes.service';
 import { PedidosService } from '../servicios/pedidos.service'; // Importa el servicio de pedidos
 import { AuthService } from '../services/auth.service'; // Importa el servicio de autenticación
+import { ViajesService } from '../servicios/viajes.service'; // Asegúrate de tener este servicio importado
 
 @Component({
   selector: 'app-servicios',
@@ -15,26 +15,40 @@ export class ServiciosPage implements OnInit {
   viajesDisponibles: any[] = []; // Lista de viajes disponibles
   searchAttempted: boolean = false; // Indicador para mostrar resultados
   userEmail: string | null = null; // Correo del usuario logueado
+  isVehicleOffered: boolean = false; // Verifica si el usuario ha ofrecido un vehículo
+  viajeEnCurso: boolean = false;
+  
 
   constructor(
     private router: Router,
-    private viajesService: ViajesService,
     private pedidosService: PedidosService, // Inyecta el servicio de pedidos
-    private authService: AuthService // Inyecta el servicio de autenticación
+    private authService: AuthService, // Inyecta el servicio de autenticación
+    private viajesService: ViajesService // Asegúrate de inyectar el servicio de viajes
   ) {}
 
   async ngOnInit() {
     // Carga inicial: obtener el correo del usuario logueado
     this.userEmail = await this.authService.getUserEmail();
+    
+    // Verificar si el usuario ha ofrecido un vehículo
+    this.isVehicleOffered = await this.viajesService.hasOfferedVehicle(this.userEmail!);
 
     // Obtén todos los viajes al iniciar la página
     this.viajesDisponibles = await this.viajesService.obtenerViajes();
+
+    // Verificar si el usuario tiene un viaje en curso
+    this.viajeEnCurso = await this.viajesService.tieneViajeEnCurso(this.userEmail!);
+
   }
 
   buscarViajes() {
+    if (this.viajeEnCurso) {
+      alert('Ya tienes un viaje en curso, no puedes buscar más viajes.');
+      return;
+    }
+
     this.searchAttempted = true;
 
-    // Filtra los resultados en función de los criterios de búsqueda
     this.viajesDisponibles = this.viajesService.obtenerViajes().filter(
       (viaje) =>
         viaje.pickupLocation.toLowerCase().includes(this.pickupLocation.toLowerCase()) &&
@@ -44,13 +58,16 @@ export class ServiciosPage implements OnInit {
   }
 
   confirmarCompra(viaje: any) {
-    // Si el viaje ya ha sido tomado, mostramos un mensaje en la card y no permitimos la compra
+    if (this.viajeEnCurso) {
+      alert('Ya tienes un viaje en curso, no puedes agregar otro.');
+      return;
+    }
+
     if (viaje.isTaken) {
       alert('Este viaje ya ha sido tomado.');
       return;
     }
 
-    // Verificar si el viaje fue creado por el usuario logueado
     if (viaje.userEmail === this.userEmail) {
       alert('No puedes tomar un viaje que tú mismo creaste.');
       return;
@@ -59,6 +76,10 @@ export class ServiciosPage implements OnInit {
     // Marca el viaje como tomado y actualiza la disponibilidad de asientos
     viaje.isTaken = true;
     this.viajesService.actualizarViaje(viaje);
+
+    // Actualizamos el estado de viajeEnCurso
+    this.viajeEnCurso = true;
+
 
     // Guarda el pedido completado en el servicio de Pedidos
     this.pedidosService.agregarPedido({
@@ -71,15 +92,11 @@ export class ServiciosPage implements OnInit {
       rating: [1, 1, 1, 1, 1], // Ejemplo de calificación
     });
 
-    console.log('Confirmaste la compra para el viaje de:', viaje.driverName);
 
     // Redirige a la página de confirmación de compra
     this.router.navigate(['/confirmar-compra'], { state: { viaje } });
   }
-
-  solicitarAsiento(viaje: any) {
-    console.log('Solicitaste un asiento en el viaje de:', viaje.driverName);
-  }
+  
 
   goToInicio() {
     this.router.navigate(['tabs/inicio']);
